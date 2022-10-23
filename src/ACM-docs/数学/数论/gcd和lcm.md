@@ -10,7 +10,7 @@ int gcd(int x,int y){
 
 ## 最小公倍数
 
-```c++
+```cpp
 int lcm(int x, int y) {
     return x * y / gcd(x, y);
 }

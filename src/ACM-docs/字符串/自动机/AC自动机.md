@@ -1,6 +1,6 @@
 # AC自动机
 
-```c++
+```cpp
 //统计原串中有多少个不同的模式串
 const int N=2e6+5;
 string s;

@@ -1,6 +1,6 @@
 # Manacher
 
-```c++
+```cpp
 const int N = 1e5 + 5;
 const char g = '&';
 char s[N];

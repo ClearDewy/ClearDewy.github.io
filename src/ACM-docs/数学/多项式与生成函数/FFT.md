@@ -1,6 +1,6 @@
 # FFT
 
-```c++
+```cpp
 const int FN=(1<<22)+1;
 complex<double>a[FN];
 const double eps=0.49,PI=acos(-1.0);

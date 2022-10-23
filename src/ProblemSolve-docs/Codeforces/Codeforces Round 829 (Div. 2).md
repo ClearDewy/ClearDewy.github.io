@@ -10,7 +10,7 @@
 
 ### Code
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 #define ll long long
 #define ptn putchar('\n')
@@ -68,7 +68,7 @@ $$
 
 ### Code:
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 #define ll long long
 #define ptn putchar('\n')
@@ -116,7 +116,7 @@ int main(){
 
 ### Code:
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 #define ll long long
 #define ptn putchar('\n')
@@ -173,7 +173,7 @@ int main(){
 
 ### Code:
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 #define ll long long
 #define ptn putchar('\n')
@@ -238,7 +238,7 @@ $$
 
 ## Code：
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 #define ll long long
 #define ptn putchar('\n')
@@ -309,7 +309,7 @@ $$
 
 ### Code:
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 #define ll long long
 #define ptn putchar('\n')

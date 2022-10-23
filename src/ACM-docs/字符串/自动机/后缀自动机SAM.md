@@ -1,6 +1,6 @@
 # 后缀自动机SAM
 
-```c++
+```cpp
 namespace SAM{
     int ch[N<<1][26], len[N<<1], pa[N<<1], idx;
     void init() {
