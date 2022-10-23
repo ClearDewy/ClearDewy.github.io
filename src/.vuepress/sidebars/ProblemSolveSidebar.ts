@@ -4,7 +4,7 @@ export const ProblemSolveSidebar=[
         prefix: "Codeforces/",
         collapsable: true,
         children: [
-
+            "Codeforces Round 829 (Div. 2)",
         ],
     },
 
