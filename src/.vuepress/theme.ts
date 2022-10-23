@@ -16,7 +16,12 @@ export default hopeTheme({
   iconPrefix:"iconfont ",
   logo: "/logo.svg",
 
-  repo: "Qingqingtuan",
+  repo: "Qingqingtuan/Qingqingtuan.github.io",
+
+  // docsRepo:"Qingqingtuan/Qingqingtuan.github.io",
+  docsBranch:"master",
+  docsDir: "src",
+
 
   themeColor: {
     blue: "#2196f3",
@@ -24,8 +29,6 @@ export default hopeTheme({
     green: "#3eaf7c",
     orange: "#fb9b5f",
   },
-
-  docsDir: "demo/theme-docs/src",
 
   pageInfo: ["Author", "Original", "Date", "Category", "Tag", "ReadingTime"],
 
@@ -51,6 +54,8 @@ export default hopeTheme({
     },
   },
 
+  editLink:true,
+  // editLinkPattern:"master",
 
   plugins: {
     // Disable features you don't want here
