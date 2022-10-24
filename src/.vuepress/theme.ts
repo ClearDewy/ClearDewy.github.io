@@ -3,7 +3,6 @@ import { Navbar } from "./Navbar";
 import { Sidebar } from "./Sidebar";
 
 export default hopeTheme({
-  mobileBreakPoint: 0,
   hostname: "https://ClearDewy.github.io",
 
   author: {
@@ -21,6 +20,7 @@ export default hopeTheme({
   docsBranch:"master",
   docsDir: "src",
 
+  pageInfo: ["Author", "Original", "Date", "Category", "Tag", "ReadingTime"],
 
   themeColor: {
     blue: "#2196f3",
@@ -28,30 +28,6 @@ export default hopeTheme({
     green: "#3eaf7c",
     orange: "#fb9b5f",
   },
-
-  pageInfo: ["Author", "Original", "Date", "Category", "Tag", "ReadingTime"],
-
-  // navbar
-  navbar: Navbar,
-
-  // sidebar
-  sidebar: Sidebar,
-
-  footer: "版权 @2022 清漙",
-
-  displayFooter: true,
-  metaLocales: {
-    editLink: "Edit this page on GitHub",
-  },
-
-  encrypt: {
-    config: {
-      "/demo/encrypt.html": ["1234"],
-    },
-  },
-
-  editLink:true,
-  // editLinkPattern:"master",
 
   blog: {
     name:"ClearDewy",
@@ -69,9 +45,22 @@ export default hopeTheme({
     timeline:"零露漙兮~",
   },
 
+  navbar: Navbar,
+  sidebar: Sidebar,
+  footer: "版权 @2022 清漙",
+  displayFooter: true,
+  metaLocales: {
+    editLink: "Edit this page on GitHub",
+  },
+
+  encrypt: {
+    config: {
+      "/demo/encrypt.html": ["1234"],
+      "/zh/demo/encrypt.html": ["1234"],
+    },
+  },
 
   plugins: {
-
     blog: {
       // 生成简介
       autoExcerpt: true,
@@ -79,10 +68,12 @@ export default hopeTheme({
         if (!filePathRelative) return false;
         return filePathRelative.startsWith("ProblemSolve-docs/");
       },
-
     },
 
-    comment:{
+    // If you don't need comment feature, you can remove following option
+    // The following config is for demo ONLY, if you need comment feature, please generate and use your own config, see comment plugin documentation for details.
+    // To avoid disturbing the theme developer and consuming his resources, please DO NOT use the following config directly in your production environment!!!!!
+    comment: {
       /**
        * Using Giscus
        */
@@ -92,7 +83,6 @@ export default hopeTheme({
       category: "Announcements",
       categoryId: "DIC_kwDOG_Pt2M4COD69",
     },
-
 
     // Disable features you don't want here
     mdEnhance: {
@@ -142,7 +132,6 @@ export default hopeTheme({
       cacheHTML: true,
       cachePic: true,
       appendBase: true,
-
     },
-  }
+  },
 });
