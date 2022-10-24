@@ -60,7 +60,9 @@ export default hopeTheme({
     },
   },
 
+
   plugins: {
+
     blog: {
       // 生成简介
       autoExcerpt: true,

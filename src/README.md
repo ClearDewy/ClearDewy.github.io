@@ -27,6 +27,11 @@ features:
     details: 清漙的题解
     link: /ProblemSolve-docs/
 
+  - title: 博客
+    icon: edit
+    details: 清漙的博客
+    link: /article/
+
 
 copyright: false
 footer: Dewy-Wiki | Copyright © 2022-present ClearDewy
