@@ -7,8 +7,8 @@ export default defineUserConfig({
   lang: "zh-CN",
   locales: {
     "/": {
-      title: "QT-Wiki",
-      description: "Qingtuan's own Wiki",
+      title: "Dewy-Wiki",
+      description: "ClearDewy's own Wiki",
     },
 
   },

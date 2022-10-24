@@ -3,7 +3,7 @@ home: true
 icon: icon-home
 title: Home
 heroImage: /logo.svg
-heroText: QT-Wiki
+heroText: Dewy-Wiki
 tagline: 清漙的个人Wiki，包含算法笔记、项目笔记、题解、项目文档等。
 actions:
   - text: 开始 💡
@@ -29,6 +29,6 @@ features:
 
 
 copyright: false
-footer: QT-Wiki | Copyright © 2022-present Qingtuan
+footer: Dewy-Wiki | Copyright © 2022-present ClearDewy
 ---
 

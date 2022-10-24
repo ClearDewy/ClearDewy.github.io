@@ -8,17 +8,17 @@ export default hopeTheme({
   hostname: "https://vuepress-theme-hope-docs-demo.netlify.app",
 
   author: {
-    name: "Qingtuan",
-    url: "https://github.com/Qingqingtuan",
+    name: "ClearDewy",
+    url: "https://github.com/ClearDewy",
   },
 
   iconAssets: "//at.alicdn.com/t/c/font_3722520_hfdaawkzbqp.css",
   iconPrefix:"iconfont ",
   logo: "/logo.svg",
 
-  repo: "Qingqingtuan/Qingqingtuan.github.io",
+  repo: "ClearDewy/ClearDewy.github.io",
 
-  // docsRepo:"Qingqingtuan/Qingqingtuan.github.io",
+  // docsRepo:"ClearDewy/ClearDewy.github.io",
   docsBranch:"master",
   docsDir: "src",
 
@@ -58,6 +58,8 @@ export default hopeTheme({
   // editLinkPattern:"master",
 
   plugins: {
+    // blog:true,
+
     // Disable features you don't want here
     mdEnhance: {
       align: true,

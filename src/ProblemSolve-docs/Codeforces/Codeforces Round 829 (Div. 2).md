@@ -22,7 +22,7 @@ inline void writ(ll x){if(x<0) {putchar('-');x=(~x)+1;}if(x>9)writ(x/10);putchar
 const int N=105;
 char s[N];
 
-void Qingtuan(){
+void ClearDewy(){
     int n=read();
     cin>>s+1;
     int ans=0;
@@ -43,7 +43,7 @@ int main(){
     //cin.tie(nullptr)->sync_with_stdio(false);
 
     int T=read();while (T--)
-    Qingtuan();
+    ClearDewy();
     return 0;
 }
 ```
@@ -80,7 +80,7 @@ inline void writ(ll x){if(x<0) {putchar('-');x=(~x)+1;}if(x>9)writ(x/10);putchar
 
 
 
-void Qingtuan(){
+void ClearDewy(){
     int n=read();
     if(n&1){
         writ(n);putchar(' ');n--;
@@ -99,7 +99,7 @@ int main(){
     //cin.tie(nullptr)->sync_with_stdio(false);
 
     int T=read();while (T--)
-    Qingtuan();
+    ClearDewy();
     return 0;
 }
 ```
@@ -128,7 +128,7 @@ inline void writ(ll x){if(x<0) {putchar('-');x=(~x)+1;}if(x>9)writ(x/10);putchar
 
 
 
-void Qingtuan(){
+void ClearDewy(){
     int n=read();
     vector<int>a(n+1);
     int sum=0;
@@ -160,7 +160,7 @@ int main(){
     //cin.tie(nullptr)->sync_with_stdio(false);
 
     int T=read();while (T--)
-    Qingtuan();
+    ClearDewy();
     return 0;
 }
 ```
@@ -185,7 +185,7 @@ inline void writ(ll x){if(x<0) {putchar('-');x=(~x)+1;}if(x>9)writ(x/10);putchar
 
 
 
-void Qingtuan(){
+void ClearDewy(){
     int n=read();
     vector<int>a(n+1);
     int sum=0;
@@ -221,7 +221,7 @@ int main(){
     //cin.tie(nullptr)->sync_with_stdio(false);
 
     int T=read();while (T--)
-    Qingtuan();
+    ClearDewy();
     return 0;
 }
 ```
@@ -249,7 +249,7 @@ inline void writ(ll x){if(x<0) {putchar('-');x=(~x)+1;}if(x>9)writ(x/10);putchar
 
 
 
-void Qingtuan(){
+void ClearDewy(){
     int n=read(),x=read();
     vector<int>a(x+2);
     for (int i = 1; i <= n; i++)
@@ -274,7 +274,7 @@ int main(){
     //cin.tie(nullptr)->sync_with_stdio(false);
 
     //int T=read();while (T--)
-    Qingtuan();
+    ClearDewy();
     return 0;
 }
 ```
@@ -332,7 +332,7 @@ ll inv(ll x){
     return fp(x,mod-2);
 }
 
-void Qingtuan(){
+void ClearDewy(){
     int n=read();
     ll invn=inv(1LL*n*(n-1)/2%mod);
     vector<int>a(n+1);
@@ -362,7 +362,7 @@ int main(){
     //cin.tie(nullptr)->sync_with_stdio(false);
 
     int T=read();while (T--)
-    Qingtuan();
+    ClearDewy();
     return 0;
 }
 ```

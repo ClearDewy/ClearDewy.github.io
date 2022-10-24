@@ -1,7 +1,7 @@
 {
-  "name": "qt-wiki",
+  "name": "Dewy-wiki",
   "version": "2.0.0",
-  "description": "Qingtuan's own Wiki",
+  "description": "ClearDewy's own Wiki",
   "license": "MIT",
   "type": "module",
   "scripts": {
