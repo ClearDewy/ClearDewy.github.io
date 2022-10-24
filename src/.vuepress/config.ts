@@ -5,13 +5,8 @@ import theme from "./theme.js";
 export default defineUserConfig({
   base: "/",
   lang: "zh-CN",
-  locales: {
-    "/": {
-      title: "Dewy-Wiki",
-      description: "ClearDewy's own Wiki",
-    },
-
-  },
+  title: "Dewy-Wiki",
+  description: "ClearDewy's own Wiki",
   plugins: [
     searchPlugin({
       locales: {

@@ -17,5 +17,10 @@ export const Navbar = navbar([
         icon: "wentijieda",
         link: "/ProblemSolve-docs/",
     },
+    {
+        text: "ClearDewy-Blog",
+        icon: "edit",
+        link: "/article/",
+    },
 
 ]);
