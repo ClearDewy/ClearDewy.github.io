@@ -66,7 +66,7 @@ export default hopeTheme({
       autoExcerpt: true,
       filter:({filePathRelative})=>{
         if (!filePathRelative) return false;
-        return filePathRelative.startsWith("ProblemSolve-docs/");
+        return filePathRelative.startsWith("ProblemSolve-docs/")||filePathRelative.startsWith("Others-docs/");
       },
     },
 
