@@ -10,7 +10,7 @@ export default hopeTheme({
     url: "https://github.com/ClearDewy",
   },
 
-  iconAssets: "//at.alicdn.com/t/c/font_3722520_bkg7wvtn8k6.css",
+  iconAssets: "//at.alicdn.com/t/c/font_3722520_p8avvst67qj.css",
   iconPrefix:"iconfont ",
   logo: "/logo.svg",
 
@@ -55,14 +55,12 @@ export default hopeTheme({
 
   encrypt: {
     config: {
-      "/demo/encrypt.html": ["1234"],
-      "/zh/demo/encrypt.html": ["1234"],
+      "/Dewy-docs/": ["021107"],
     },
   },
 
 
   plugins: {
-
     blog: {
       // 生成简介
       autoExcerpt: true,

@@ -32,6 +32,11 @@ features:
     details: 清漙的博客
     link: /article/
 
+  - title: 文档
+    icon: document_fill
+    details: 清漙的项目文档
+    link: /Dewy-docs/
+
 
 copyright: false
 footer: Dewy-Wiki | Copyright © 2022-present ClearDewy
