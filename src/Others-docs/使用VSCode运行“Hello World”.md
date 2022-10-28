@@ -8,7 +8,7 @@
 
     进入[VSCode官网](https://code.visualstudio.com/)，点击下载安装程序，然后安装；
 
-    ![image-20220904232534123](https://raw.githubusercontent.com/Qingqingtuan/TyporaImg/main/img/202210161827236.png)
+    ![88c9f344ad1645e587c2a5376044ad1e](https://cdn.jsdelivr.net/gh//ClearDewy/TyporaImg/img/202210271515992.png)
 
     ## 2. 下载插件和MinGW
 

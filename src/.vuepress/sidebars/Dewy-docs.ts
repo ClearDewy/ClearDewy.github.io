@@ -32,7 +32,7 @@ export const DewySidebar=[
         prefix: "MorningForEnid/",
         collapsable: true,
         children: [
-
+            "源代码","Docker部署",
         ],
     },
 ]
