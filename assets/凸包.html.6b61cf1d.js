@@ -1,1 +1,0 @@
-import{_ as t}from"./_plugin-vue_export-helper.cdc0426e.js";import{o as a,c as o,a as e,b as r}from"./app.49e62542.js";const c={},s=e("h1",{id:"凸包",tabindex:"-1"},[e("a",{class:"header-anchor",href:"#凸包","aria-hidden":"true"},"#"),r(" 凸包")],-1),_=[s];function n(d,i){return a(),o("div",null,_)}const f=t(c,[["render",n],["__file","凸包.html.vue"]]);export{f as default};
