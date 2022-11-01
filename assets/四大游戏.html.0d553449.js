@@ -1,0 +1,1 @@
+import{_ as t}from"./_plugin-vue_export-helper.cdc0426e.js";import{o as a,c as o,a as e,b as r}from"./app.df47eb84.js";const _={},c=e("h1",{id:"四大游戏",tabindex:"-1"},[e("a",{class:"header-anchor",href:"#四大游戏","aria-hidden":"true"},"#"),r(" 四大游戏")],-1),s=[c];function n(d,i){return a(),o("div",null,s)}const f=t(_,[["render",n],["__file","四大游戏.html.vue"]]);export{f as default};
