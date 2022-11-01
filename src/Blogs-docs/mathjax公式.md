@@ -1,4 +1,4 @@
-# $mathjax$公式常用语法
+# mathjax公式常用语法
 
 ## 希腊字母
 
@@ -40,25 +40,25 @@
 
 ### 基础符号
 
-|   运算符    |    说明    |     应用举例      |       命令       |
-| :---------: | :--------: | :---------------: | :--------------: |
-|     $+$     |     加     |       $x+y$       |       x+y        |
-|     $-$     |     减     |       $x-y$       |       x-y        |
-|  $\times$   |    叉乘    |   $x \times y$    |    x \times y    |
-|   $\cdot$   |    点乘    |    $x \cdot y$    |    x \cdot y     |
-|  $\ast(*)$  |    星乘    | $x \ast y(x * y)$ | x \ast y (x * y) |
-|   $\div$    |     除     |    $x \div y$     |     x \div y     |
-|    $\pm$    |    加减    |     $x \pm y$     |     x \pm y      |
-|    $\mp$    |    减加    |     $x \mp y$     |     x \mp y      |
-|     $=$     |    等于    |       $x=y$       |       x=y        |
-|   $\leq$    |  小于等于  |    $x \leq y$     |     x \leq y     |
-|   $\geq$    |  大于等于  |    $x \geq y$     |     x \geq y     |
-|  $\approx$  |   约等于   |   $x \approx y$   |   x \approx y    |
-|  $\equiv$   |   恒等于   |   $x \equiv y$    |    x \equiv y    |
-| $\bigodot$  | 定义运算符 |  $x \bigodot y$   |   x \bigodot y   |
-| $\bigtimes$ | 定义运算符 | $x \bigotimes y$  |  x \bigotimes y  |
-| $\frac{}{}$ |    分式    |   $\frac{x}{y}$   |   \frac{x}{y}    |
-| $\sqrt{}{}$ |    根式    |   $\sqrt[a]{b}$   |   \sqrt[a]{b}    |
+|    运算符    |    说明    |     应用举例      |       命令       |
+| :----------: | :--------: | :---------------: | :--------------: |
+|     $+$      |     加     |       $x+y$       |       x+y        |
+|     $-$      |     减     |       $x-y$       |       x-y        |
+|   $\times$   |    叉乘    |   $x \times y$    |    x \times y    |
+|   $\cdot$    |    点乘    |    $x \cdot y$    |    x \cdot y     |
+|  $\ast(*)$   |    星乘    | $x \ast y(x * y)$ | x \ast y (x * y) |
+|    $\div$    |     除     |    $x \div y$     |     x \div y     |
+|    $\pm$     |    加减    |     $x \pm y$     |     x \pm y      |
+|    $\mp$     |    减加    |     $x \mp y$     |     x \mp y      |
+|     $=$      |    等于    |       $x=y$       |       x=y        |
+|    $\leq$    |  小于等于  |    $x \leq y$     |     x \leq y     |
+|    $\geq$    |  大于等于  |    $x \geq y$     |     x \geq y     |
+|  $\approx$   |   约等于   |   $x \approx y$   |   x \approx y    |
+|   $\equiv$   |   恒等于   |   $x \equiv y$    |    x \equiv y    |
+|  $\bigodot$  | 定义运算符 |  $x \bigodot y$   |   x \bigodot y   |
+| $\bigotimes$ | 定义运算符 | $x \bigotimes y$  |  x \bigotimes y  |
+| $\frac{}{}$  |    分式    |   $\frac{x}{y}$   |   \frac{x}{y}    |
+| $\sqrt{}{}$  |    根式    |   $\sqrt[a]{b}$   |   \sqrt[a]{b}    |
 
 ### 集合符号
 
@@ -152,7 +152,7 @@ $$
 a_1x+b_1y+c_1z=d_1\\
 a_2x+b_2y+c_2z=d_2\\
 a_3x+b_3y+c_3z=d_3\\
-\end{cases}
+\end{cases}
 $$
 
 ### 对齐

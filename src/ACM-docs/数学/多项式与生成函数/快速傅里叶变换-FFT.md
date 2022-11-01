@@ -122,8 +122,9 @@ complex<double>a[FN];
 const double eps=0.49,PI=acos(-1.0);
 int rev[FN];
 int n,m;
-int FFT(){
+void FFT(){
     function<int(int)>pg=[&](int x)->int{
+        if((x&-x)==x)return x;
         x |= x >> 1;x |= x >> 2;x |= x >> 4;x |= x >> 8;x |= x >> 16;return x + 1;
     };
     int len=pg(m+n);
@@ -143,6 +144,8 @@ int FFT(){
                 }
             }
         }
+        if(typ==1)return;
+        for (int i = 0; i < len; i++)a[i].imag(a[i].imag() / 2 / len + eps);
     };
     for (int i = 0; i < len; i++)
         rev[i]=(rev[i>>1]>>1)|(i&1)*(pg(m+n)>>1);
@@ -150,9 +153,6 @@ int FFT(){
     for (int i = 0; i <= len; i++)
         a[i]=a[i]*a[i];
     fft(-1);
-    //答案为 a[i].imag() / 2 / len + eps 的整数部分
-
-    return len;
 }
 void ClearDewy(){
     n=read();m=read();
@@ -164,10 +164,10 @@ void ClearDewy(){
     {
         a[i].imag(read());
     }
-    int len=FFT();
+    FFT();
     for (int i = 0; i <= m+n; i++)
     {
-        printf("%.0f ",a[i].imag() / 2 / len + eps);
+        printf("%.0f ",a[i].imag());
     }
 }
 ```

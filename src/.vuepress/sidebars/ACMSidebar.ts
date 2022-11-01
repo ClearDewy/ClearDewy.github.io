@@ -82,7 +82,7 @@ export const ACMSidebar=[
                 prefix: "多项式与生成函数/",
                 collapsable: true,
                 children: [
-                    "FFT","NTT"
+                    "快速傅里叶变换-FFT","快速数论变换-NTT","多项式的逆","多项式的指数和对数函数","多项式运算封装"
                 ],
             },
             {

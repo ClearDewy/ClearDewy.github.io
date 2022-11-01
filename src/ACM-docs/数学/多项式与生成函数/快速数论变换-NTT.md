@@ -124,8 +124,9 @@ inline ll fp(ll x, ll y) {
     return base;
 }
 
-int NTT(){
+void NTT(){
     function<int(int)>pg=[&](int x)->int{
+        if((x&-x)==x)return x;
         x |= x >> 1;x |= x >> 2;x |= x >> 4;x |= x >> 8;x |= x >> 16;return x + 1;
     };
     int len=pg(m+n);
@@ -146,6 +147,9 @@ int NTT(){
                 }
             }
         }
+        if(typ==1)return;
+        ll len_inv=fp(len,mod-2);
+        for (int i = 0; i < len; i++)a[i]=a[i]*len_inv%mod;
     };
     for (int i = 0; i < len; i++)
         rev[i]=(rev[i>>1]>>1)|(i&1)*(pg(m+n)>>1);
@@ -153,11 +157,8 @@ int NTT(){
     for (int i = 0; i <= len; i++)
         a[i] = a[i] * b[i] % mod; 
     ntt(a,-1);
-    //答案为 a[i]*inv(len)%mod
-
-    return len;
 }
-void Qingtuan(){
+void ClearDewy(){
     n=read();m=read();
     for (int i = 0; i <= n; i++)
     {
@@ -170,7 +171,7 @@ void Qingtuan(){
     int inv=fp(NTT(),mod-2);
     for (int i = 0; i <= m+n; i++)
     {
-        printf("%lld ",a[i]*inv%mod);
+        printf("%lld ",a[i]);
     }
 }
 ```
