@@ -1,0 +1,23 @@
+import{_ as n}from"./_plugin-vue_export-helper.cdc0426e.js";import{o as s,c as a,d as e}from"./app.62d83eb4.js";const t={},d=e(`<h1 id="约束" tabindex="-1"><a class="header-anchor" href="#约束" aria-hidden="true">#</a> 约束</h1><table><thead><tr><th>约束名称</th><th>描述</th><th>关键字</th></tr></thead><tbody><tr><td>非空约束</td><td>保证列中所有数据不能有NULL值</td><td>NOT NULL</td></tr><tr><td>唯一约束</td><td>保证列中所有数据各不相同</td><td>UNIQUE</td></tr><tr><td>主键约束</td><td>主键时一行数据的唯一标识，要求非空且唯一</td><td>PRIMARY KEY</td></tr><tr><td>检查约束</td><td>保证列中的值满足某一条件</td><td>CHECK</td></tr><tr><td>默认约束</td><td>保存数据时，未指定值则采用默认值</td><td>DEFAULT</td></tr><tr><td>外键约束</td><td>外键用来让两个表数据之间建立链接，保证数据的一致性和完整性</td><td>FOREIGN KEY</td></tr></tbody></table><h2 id="约束-1" tabindex="-1"><a class="header-anchor" href="#约束-1" aria-hidden="true">#</a> 约束</h2><div class="language-sql line-numbers-mode" data-ext="sql"><pre class="language-sql"><code><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> 表名<span class="token punctuation">(</span>
+	字段名<span class="token number">1</span> 数据类型<span class="token number">1</span> 约束名称<span class="token punctuation">,</span>
+    字段名<span class="token number">2</span> 数据类型<span class="token number">2</span> 约束名称<span class="token punctuation">,</span>
+    ……
+    字段名<span class="token number">3</span> 数据类型<span class="token number">3</span> 约束名称
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="外键约束" tabindex="-1"><a class="header-anchor" href="#外键约束" aria-hidden="true">#</a> 外键约束</h2><div class="language-sql line-numbers-mode" data-ext="sql"><pre class="language-sql"><code><span class="token comment">-- 创建表时添加</span>
+<span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> 表名<span class="token punctuation">(</span>
+	字段名 数据类型<span class="token punctuation">,</span>
+    ……
+	<span class="token punctuation">[</span><span class="token keyword">CONSTRAINT</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>外键名称<span class="token punctuation">]</span> <span class="token keyword">FOREIGN</span> KET<span class="token punctuation">(</span>外键列名<span class="token punctuation">)</span> <span class="token keyword">REFERENCES</span> 主表<span class="token punctuation">(</span>主表列名<span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">-- 建表后添加</span>
+<span class="token keyword">ALTER</span> <span class="token keyword">TABLE</span> 表名 <span class="token keyword">ADD</span> <span class="token keyword">CONSTRAINT</span> 外键名称 <span class="token keyword">FOREIGN</span> <span class="token keyword">KEY</span><span class="token punctuation">(</span>外键列名<span class="token punctuation">)</span> <span class="token keyword">REFERENCES</span> 主表<span class="token punctuation">(</span>主表列名<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">-- 删除约束</span>
+<span class="token keyword">ALTER</span> <span class="token keyword">TABLE</span> 表名 <span class="token keyword">DROP</span> <span class="token keyword">FOREIGN</span> <span class="token keyword">KEY</span> 外键列名<span class="token punctuation">;</span>
+
+<span class="token comment">-- 外键级联</span>
+<span class="token keyword">ON</span> <span class="token keyword">DELETE</span> <span class="token keyword">CASCADE</span> 级联删除
+<span class="token keyword">ON</span> <span class="token keyword">UPDATE</span> <span class="token keyword">CASCADE</span> 级联更新
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="" tabindex="-1"><a class="header-anchor" href="#" aria-hidden="true">#</a></h2>`,7),p=[d];function c(o,l){return s(),a("div",null,p)}const u=n(t,[["render",c],["__file","约束.html.vue"]]);export{u as default};
