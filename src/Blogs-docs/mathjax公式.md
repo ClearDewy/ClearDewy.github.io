@@ -59,6 +59,10 @@
 | $\bigotimes$ | 定义运算符 | $x \bigotimes y$  |  x \bigotimes y  |
 | $\frac{}{}$  |    分式    |   $\frac{x}{y}$   |   \frac{x}{y}    |
 | $\sqrt{}{}$  |    根式    |   $\sqrt[a]{b}$   |   \sqrt[a]{b}    |
+|    $\int$    |  一重积分  |   $\int_a^b x$    |    \int_a^b x    |
+|   $\iint$    |  二重积分  |   $\iint_a^b x$   |   \iint_a^b x    |
+|   $\iiint$   |  三重积分  |  $\iiint_a^b x$   |   \iiint_a^b x   |
+|   $\oint$    |  环形积分  |   $\oint_a^b x$   |   \oint_a^b x    |
 
 ### 集合符号
 
@@ -126,13 +130,13 @@ $$
 
 #### 矩阵边框
 
-|    类型    |  命令   |                   矩阵边框显示效果                    |
-| :--------: | :-----: | :---------------------------------------------------: |
-| 小括号边框 | pmatrix | $$\begin{pmatrix}1&0&0\\0&1&0\\0&0&1\\\end{pmatrix}$$ |
-| 中括号边框 | bmatrix | $$\begin{bmatrix}1&0&0\\0&1&0\\0&0&1\\\end{bmatrix}$$ |
-| 大括号边框 | Bmatrix | $$\begin{Bmatrix}1&0&0\\0&1&0\\0&0&1\\\end{Bmatrix}$$ |
-| 单竖线边框 | vmatrix | $$\begin{vmatrix}1&0&0\\0&1&0\\0&0&1\\\end{vmatrix}$$ |
-| 双竖线边框 | Vmatrix | $$\begin{Vmatrix}1&0&0\\0&1&0\\0&0&1\\\end{Vmatrix}$$ |
+|    类型    |  命令   |                 矩阵边框显示效果                  |
+| :--------: | :-----: | :-----------------------------------------------: |
+| 小括号边框 | pmatrix | $\begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix}$ |
+| 中括号边框 | bmatrix | $\begin{bmatrix}1&0&0\\0&1&0\\0&0&1\end{bmatrix}$ |
+| 大括号边框 | Bmatrix | $\begin{Bmatrix}1&0&0\\0&1&0\\0&0&1\end{Bmatrix}$ |
+| 单竖线边框 | vmatrix | $\begin{vmatrix}1&0&0\\0&1&0\\0&0&1\end{vmatrix}$ |
+| 双竖线边框 | Vmatrix | $\begin{Vmatrix}1&0&0\\0&1&0\\0&0&1\end{Vmatrix}$ |
 
 ## 多行式子
 

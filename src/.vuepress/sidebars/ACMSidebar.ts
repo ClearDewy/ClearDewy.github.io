@@ -82,7 +82,7 @@ export const ACMSidebar=[
                 prefix: "多项式与生成函数/",
                 collapsable: true,
                 children: [
-                    "快速傅里叶变换-FFT","快速数论变换-NTT","多项式的逆","多项式的指数和对数函数","多项式运算封装"
+                    "快速傅里叶变换-FFT","快速数论变换-NTT","多项式的逆","多项式的对数函数","多项式的指数函数","多项式运算封装"
                 ],
             },
             {
@@ -126,7 +126,15 @@ export const ACMSidebar=[
         prefix: "数据结构/",
         collapsable: true,
         children: [
-            "并查集","树状数组","线段树"
+            "并查集","树状数组","线段树",
+            {
+                text:"可持久化数据结构",
+                prefix: "可持久化数据结构/",
+                collapsable: true,
+                children: [
+                    "可持久化线段树",
+                ],
+            },
         ],
     },
 
