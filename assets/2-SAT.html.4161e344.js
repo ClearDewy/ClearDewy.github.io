@@ -1,0 +1,1 @@
+import{_ as t}from"./_plugin-vue_export-helper.cdc0426e.js";import{o as a,c as o,a as e,b as r}from"./app.e7232b18.js";const s={},c=e("h1",{id:"_2-sat",tabindex:"-1"},[e("a",{class:"header-anchor",href:"#_2-sat","aria-hidden":"true"},"#"),r(" 2-SAT")],-1),_=[c];function n(d,i){return a(),o("div",null,_)}const f=t(s,[["render",n],["__file","2-SAT.html.vue"]]);export{f as default};
