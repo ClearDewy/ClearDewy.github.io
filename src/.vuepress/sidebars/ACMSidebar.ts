@@ -114,7 +114,7 @@ export const ACMSidebar=[
                 prefix: "博弈论/",
                 collapsable: true,
                 children: [
-                    "四大游戏","SG函数"
+                    "经典博弈","SG函数"
                 ],
             },
         ],
