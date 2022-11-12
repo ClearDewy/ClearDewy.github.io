@@ -157,7 +157,14 @@ export const ACMSidebar=[
                 prefix: "连通性/",
                 collapsable: true,
                 children: [
-
+                    {
+                        text: "有向图的连通性",
+                        prefix: "有向图的连通性/",
+                        collapsable: true,
+                        children: [
+                            "Tarjan算法"
+                        ],
+                    }
                 ],
             },
             "2-SAT",
