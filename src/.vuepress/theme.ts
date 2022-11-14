@@ -1,10 +1,10 @@
 import { hopeTheme } from "vuepress-theme-hope";
 import { Navbar } from "./Navbar";
 import { Sidebar } from "./Sidebar";
+import {Codeforces_svg} from "./public/assets/svg"
 
 export default hopeTheme({
   hostname: "https://ClearDewy.github.io",
-
   author: {
     name: "ClearDewy",
     url: "https://github.com/ClearDewy",
@@ -40,7 +40,7 @@ export default hopeTheme({
       QQ: "http://wpa.qq.com/msgrd?v=3&uin=2233408834&site=qq&menu=yes",
       Github: "https://github.com/ClearDewy",
       Gitee: "https://gitee.com/ClearDewy",
-      // Codeforces:["https://codeforces.com/profile/Qingtuan",]
+      Codeforces:["https://codeforces.com/profile/Qingtuan",Codeforces_svg]
     },
     intro:"/",
     timeline:"零露漙兮~",
@@ -99,7 +99,7 @@ export default hopeTheme({
       imageSize: true,
       include: true,
       katex: true,
-      lazyLoad: true,
+      imageLazyload: true,
       mark: true,
       mermaid: true,
       playground: {
@@ -124,7 +124,7 @@ export default hopeTheme({
       sub: true,
       sup: true,
       tabs: true,
-      vpre: true,
+      vPre: true,
       vuePlayground: true,
     },
 
