@@ -5,7 +5,7 @@ export const DewySidebar=[
         prefix: "ScmzuOnlineJudge/",
         collapsable: true,
         children: [
-            "部署","前端修改","后端修改","服务器","题目难度设置",
+            "部署","Frontend","Backend","JudgeServer","服务器","题目难度",
         ],
     },
     {
