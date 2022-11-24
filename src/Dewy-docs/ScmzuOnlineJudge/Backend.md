@@ -1,16 +1,14 @@
-# 后端修改
+# Backend
 
 ## 更新镜像：
 
 ```shell
-docker cp D:\OJDATA\HOJ\hoj-springboot\DataBackup\target\hoj-backend-4.5.jar hoj-backend:/app.jar
+docker cp D:\\OJDATA\\HOJ\\hoj-springboot\\DataBackup\\target\\hoj-backend-4.5.jar hoj-backend:/app.jar
 
-docker commit -m "Dewyoj-backend" -a "ClearDewy" 容器ID dewyoj-backend
+docker commit -m "Dewyoj-backend" -a "ClearDewy" hoj-backend dewyoj-backend
 
-docker images
+docker tag dewyoj-backend registry.cn-hangzhou.aliyuncs.com/cleardewy/hoj:Dewyoj-backend
 
-docker login --username=qingtuan registry.cn-hangzhou.aliyuncs.com
-docker tag [ImageId] registry.cn-hangzhou.aliyuncs.com/cleardewy/hoj:Dewyoj-backend
 docker push registry.cn-hangzhou.aliyuncs.com/cleardewy/hoj:Dewyoj-backend
 ```
 

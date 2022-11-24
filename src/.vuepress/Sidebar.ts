@@ -6,7 +6,7 @@ import {DewySidebar} from "./sidebars/Dewy-docs"
 
 
 export const Sidebar = sidebar({
-    '/ACM-docs/': ACMSidebar,
+    "/ACM-docs/": ACMSidebar,
     "/Projects-docs/":ProjectsSidebar,
     "/ProblemSolve-docs/":ProblemSolveSidebar,
     "/Dewy-docs/":DewySidebar

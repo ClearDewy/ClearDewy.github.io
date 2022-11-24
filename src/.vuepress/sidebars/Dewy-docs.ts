@@ -3,7 +3,7 @@ export const DewySidebar=[
         text:"Scmzu Online Judge",
         link:"ScmzuOnlineJudge/",
         prefix: "ScmzuOnlineJudge/",
-        collapsable: true,
+        collapsible: true,
         children: [
             "部署","Frontend","Backend","JudgeServer","服务器","题目难度",
         ],
@@ -12,7 +12,7 @@ export const DewySidebar=[
         text:"ACM Sign In System",
         link:"ACMSignInSystem/",
         prefix: "ACMSignInSystem/",
-        collapsable: true,
+        collapsible: true,
         children: [
 
         ],
@@ -21,16 +21,16 @@ export const DewySidebar=[
         text:"Lesson Grabbing Script",
         link:"LessonGrabbingScript/",
         prefix: "LessonGrabbingScript/",
-        collapsable: true,
+        collapsible: true,
         children: [
-
+            "使用方法","源码解析"
         ],
     },
     {
         text:"Morning For Enid",
         link:"MorningForEnid/",
         prefix: "MorningForEnid/",
-        collapsable: true,
+        collapsible: true,
         children: [
             "源代码","Docker部署",
         ],

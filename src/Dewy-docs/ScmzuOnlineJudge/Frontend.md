@@ -1,16 +1,14 @@
-# 前端修改
+# Frontend
 
 ## 更新镜像：
 
 ```shell
-docker cp D:\OJDATA\HOJ\hoj-vue\dist hoj-frontend:/usr/share/nginx/html
+docker cp D:\\OJDATA\\HOJ\\hoj-vue\\dist hoj-frontend:/usr/share/nginx/html
 
-docker commit -m "提示信息" -a "作者" 容器ID 镜像名称
-# docker commit -m "Dewyoj-front" -a "ClearDewy" 容器ID dewyoj-front
+docker commit -m "Dewyoj-front" -a "ClearDewy" hoj-frontend dewyoj-front
 
-docker images
-docker login --username=qingtuan registry.cn-hangzhou.aliyuncs.com
-docker tag [ImageId] registry.cn-hangzhou.aliyuncs.com/cleardewy/hoj:Dewyoj-front
+docker tag dewyoj-front registry.cn-hangzhou.aliyuncs.com/cleardewy/hoj:Dewyoj-front
+
 docker push registry.cn-hangzhou.aliyuncs.com/cleardewy/hoj:Dewyoj-front
 ```
 
