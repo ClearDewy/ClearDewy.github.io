@@ -64,7 +64,7 @@ export default hopeTheme({
   plugins: {
     blog: {
       // 生成简介
-      autoExcerpt: true,
+      excerpt: true,
       filter:({filePathRelative})=>{
         if (!filePathRelative) return false;
         return filePathRelative.startsWith("ProblemSolve-docs/")||filePathRelative.startsWith("Blogs-docs/");
@@ -96,10 +96,10 @@ export default hopeTheme({
       echarts: true,
       flowchart: true,
       gfm: true,
-      imageSize: true,
+      imgSize: true,
       include: true,
       katex: true,
-      imageLazyload: true,
+      imgLazyload: true,
       mark: true,
       mermaid: true,
       playground: {

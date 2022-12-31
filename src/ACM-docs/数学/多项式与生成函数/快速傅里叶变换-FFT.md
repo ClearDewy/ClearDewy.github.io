@@ -29,7 +29,7 @@ $$
 
 ### 复数
 
-在复平面内作单位元，并将其分成$n$份，如图：![202210292347117](https://cdn.jsdelivr.net/gh/ClearDewy/TyporaImg/img/202210292348928.png)
+在复平面内作单位元，并将其分成$n$份，如图：![202210292347117](https://raw.githubusercontent.com/ClearDewy/TyporaImg/main/img/202210292348928.png)
 
 从$0$开始标号，记$\omega_n^k$为将单位元分成$n$份后的第$k$分，由图我们可以得到如下性质：
 $$
@@ -94,7 +94,7 @@ $$
 
 ### 迭代版（蝴蝶变换）
 
-![img](https://cdn.jsdelivr.net/gh/ClearDewy/TyporaImg/img/202210300034009.png)
+![img](https://raw.githubusercontent.com/ClearDewy/TyporaImg/main/img/202210300034009.png)
 
 发现：**每个位置分治后的最终位置为其二进制翻转后得到的位置**
 

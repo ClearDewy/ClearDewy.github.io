@@ -93,7 +93,7 @@ $$
 
 ### 迭代版（蝴蝶变换）
 
-![img](https://cdn.jsdelivr.net/gh/ClearDewy/TyporaImg/img/202210302103786.png)
+![img](https://raw.githubusercontent.com/ClearDewy/TyporaImg/main/img/202210302103786.png)
 
 发现：**每个位置分治后的最终位置为其二进制翻转后得到的位置**
 
