@@ -1,0 +1,1 @@
+import{_ as t,W as _,X as a,Y as e,Z as c}from"./framework-9028b4f1.js";const r={},s=e("h1",{id:"平面最近点对",tabindex:"-1"},[e("a",{class:"header-anchor",href:"#平面最近点对","aria-hidden":"true"},"#"),c(" 平面最近点对")],-1),o=[s];function n(d,i){return _(),a("div",null,o)}const l=t(r,[["render",n],["__file","平面最近点对.html.vue"]]);export{l as default};

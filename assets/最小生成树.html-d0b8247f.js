@@ -1,0 +1,1 @@
+import{_ as t,W as _,X as a,Y as e,Z as c}from"./framework-9028b4f1.js";const r={},s=e("h1",{id:"最小生成树",tabindex:"-1"},[e("a",{class:"header-anchor",href:"#最小生成树","aria-hidden":"true"},"#"),c(" 最小生成树")],-1),o=[s];function n(d,i){return _(),a("div",null,o)}const l=t(r,[["render",n],["__file","最小生成树.html.vue"]]);export{l as default};
