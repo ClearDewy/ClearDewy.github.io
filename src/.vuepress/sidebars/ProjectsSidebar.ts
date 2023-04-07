@@ -52,7 +52,7 @@ export const ProjectsSidebar=[
                 prefix: "基本用法/",
                 collapsible: true,
                 children: [
-                    "Controller","Mybatis","slf4j日志","注解",
+                    "Controller","Mybatis","slf4j日志","注解","SpringDoc","Exception","Redis","Cache","Exception","Jwt"
                 ],
             },
             {
