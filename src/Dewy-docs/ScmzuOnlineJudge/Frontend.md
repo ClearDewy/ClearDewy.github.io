@@ -3,7 +3,7 @@
 ## 更新镜像：
 
 ```shell
-docker cp D:\\OJDATA\\HOJ\\hoj-vue\\dist hoj-frontend:/usr/share/nginx/html
+docker cp D:\\OJDATA\MyHoj\hoj-vue\dist hoj-frontend:/usr/share/nginx/html
 
 docker commit -m "Dewyoj-front" -a "ClearDewy" hoj-frontend dewyoj-front
 

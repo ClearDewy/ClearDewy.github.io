@@ -26,7 +26,7 @@
 | :-----------------: | :---------------: | :--------------------------: | :------------------------: |
 |        $a^b$        |        a^b        |            $a\ b$            |            a\ b            |
 |        $a_b$        |        a_b        |          $a\quad b$          |          a\quad b          |
-|      $\vec a$       |      \vec a       |        $\binom{n}{m}$        |        \binom{a}{b}        |
+|      $\vec a$       |      \vec a       |        $\binom{a}{b}$        |        \binom{a}{b}        |
 | $\overrightarrow a$ | \overrightarrow a |    $\langle ... \rangle$     |    \langle ... \rangle     |
 |      $\hat a$       |      \hat a       |      $\vert ... \vert$       |      \vert ... \vert       |
 |    $\overline a$    |    \overline a    |      $\Vert ... \Vert$       |      \Vert ... \Vert       |

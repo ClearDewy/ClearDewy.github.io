@@ -3,7 +3,7 @@
 ## 更新镜像：
 
 ```shell
-docker cp D:\\OJDATA\\HOJ\\hoj-springboot\\DataBackup\\target\\hoj-backend-4.5.jar hoj-backend:/app.jar
+docker cp D:\\OJDATA\MyHoj\hoj-springboot\DataBackup\target\hoj-backend-4.6.jar hoj-backend:/app.jar
 
 docker commit -m "Dewyoj-backend" -a "ClearDewy" hoj-backend dewyoj-backend
 
