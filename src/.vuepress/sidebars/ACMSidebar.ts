@@ -214,7 +214,7 @@ export const ACMSidebar=[
         prefix: "黑科技/",
         collapsible: true,
         children: [
-            "快读快写","随机unordered_map种子",
+            "快读快写","随机unordered_map种子","数据生成与对拍"
         ],
     },
 ]
