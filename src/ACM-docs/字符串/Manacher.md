@@ -25,7 +25,7 @@ void Manacher() {
     for (int i = 0, l = 0, r = -1; i <= n; i++)
     {
         int k = (i > r) ? 1 : min(pi[l + r - i], r - i + 1);
-        while (s[i - k] == s[i + k])
+        while (0 <= i - k && i + k <= n &&s[i - k] == s[i + k])
         {
             k++;
         }
