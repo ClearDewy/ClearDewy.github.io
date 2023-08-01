@@ -175,7 +175,7 @@ export const ACMSidebar=[
                 prefix: "网络流/",
                 collapsible: true,
                 children: [
-
+                    "最大流"
                 ],
             },
         ],
