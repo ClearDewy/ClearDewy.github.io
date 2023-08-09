@@ -2,30 +2,21 @@
 
 ```cpp
 const int N = 1e5 + 5;
-const char g = '&';
-char s[N];
-int n = 0;
-int pi[N << 1] = { 0 };  //以i为中心的半径为pi[i]的回文字符串
+char s[N <<1];
+int snt = 0;
+int pi[N << 1];  //以i为中心的半径为pi[i]的回文字符串
 
-void Manacher() {
-    char c;
-    s[0] = '$';   //使头和尾不相同 
-    while (1)
-    {
-        c = getchar();
-        if (c == '\n')
-        {
-            break;
-        }
-        s[++n] = c;
-        s[++n] = g;
+void Manacher(string t) {
+    s[0]='$';
+    for(char &c:t){
+        s[++snt]=c;
+        s[++snt]='^';
     }
-    s[n] = '^';
 
-    for (int i = 0, l = 0, r = -1; i <= n; i++)
+    for (int i = 0, l = 0, r = -1; i <= snt; i++)
     {
         int k = (i > r) ? 1 : min(pi[l + r - i], r - i + 1);
-        while (0 <= i - k && i + k <= n &&s[i - k] == s[i + k])
+        while (0 <= i - k && i + k <= snt &&s[i - k] == s[i + k])
         {
             k++;
         }

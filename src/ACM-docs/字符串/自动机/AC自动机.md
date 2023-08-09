@@ -3,11 +3,10 @@
 ```cpp
 //统计原串中有多少个不同的模式串
 const int N=2e6+5;
-string s;
 int tr[N][26],cnt=0;
 int vi[N],fail[N];
 
-inline void insert(){
+inline void insert(string s){
     int idx=0;
     for(char &i:s){
         if(!tr[idx][i-'a'])tr[idx][i-'a']=++cnt;
@@ -28,7 +27,7 @@ inline void get_fail(){
     }
 }
 
-int query(){
+int query(string s){
     int idx,res=0;
     for(char &i:s){
         idx=tr[idx][i-'a'];
