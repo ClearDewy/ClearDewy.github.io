@@ -28,7 +28,7 @@ inline void get_fail(){
 }
 
 int query(string s){
-    int idx,res=0;
+    int idx=0,res=0;
     for(char &i:s){
         idx=tr[idx][i-'a'];
         for (int j = idx; j && ~vi[j]; j=fail[j])
