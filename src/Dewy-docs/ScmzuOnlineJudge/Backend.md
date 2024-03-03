@@ -5,9 +5,8 @@
 ```shell
 docker cp D:\\OJDATA\MyHoj\hoj-springboot\DataBackup\target\hoj-backend-4.6.jar hoj-backend:/app.jar
 
-docker commit -m "Dewyoj-backend" -a "ClearDewy" hoj-backend dewyoj-backend
+docker commit -m "Dewyoj-backend" -a "ClearDewy" hoj-backend registry.cn-hangzhou.aliyuncs.com/cleardewy/hoj:Dewyoj-backend
 
-docker tag dewyoj-backend registry.cn-hangzhou.aliyuncs.com/cleardewy/hoj:Dewyoj-backend
 
 docker push registry.cn-hangzhou.aliyuncs.com/cleardewy/hoj:Dewyoj-backend
 ```

@@ -5,9 +5,7 @@
 ```shell
 docker cp D:\\OJDATA\MyHoj\hoj-vue\dist hoj-frontend:/usr/share/nginx/html
 
-docker commit -m "Dewyoj-front" -a "ClearDewy" hoj-frontend dewyoj-front
-
-docker tag dewyoj-front registry.cn-hangzhou.aliyuncs.com/cleardewy/hoj:Dewyoj-front
+docker commit -m "Dewyoj-front" -a "ClearDewy" hoj-frontend registry.cn-hangzhou.aliyuncs.com/cleardewy/hoj:Dewyoj-front
 
 docker push registry.cn-hangzhou.aliyuncs.com/cleardewy/hoj:Dewyoj-front
 ```
