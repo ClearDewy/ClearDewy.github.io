@@ -13,6 +13,11 @@ export const Navbar = navbar([
         link: "/Projects-docs/",
     },
     {
+        text: "Interview-Note",
+        icon: "mianshi",
+        link: "/Interview/",
+    },
+    {
         text: "ProblemSolve-Note",
         icon: "wentijieda",
         link: "/ProblemSolve-docs/",
