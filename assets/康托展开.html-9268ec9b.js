@@ -1,1 +1,0 @@
-import{_ as t,W as a,X as _,Y as e,Z as c}from"./framework-9028b4f1.js";const r={},s=e("h1",{id:"康托展开",tabindex:"-1"},[e("a",{class:"header-anchor",href:"#康托展开","aria-hidden":"true"},"#"),c(" 康托展开")],-1),o=[s];function n(d,i){return a(),_("div",null,o)}const l=t(r,[["render",n],["__file","康托展开.html.vue"]]);export{l as default};
