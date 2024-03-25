@@ -21,6 +21,11 @@ features:
     icon: xiangmu
     details: 清漙的项目笔记
     link: /Projects-docs/
+    
+  - title: Enid-docs
+    icon: xiangmu
+    details: 坤坤包的项目笔记
+    link: /Enid-docs/
 
   - title: 题解
     icon: wentijieda

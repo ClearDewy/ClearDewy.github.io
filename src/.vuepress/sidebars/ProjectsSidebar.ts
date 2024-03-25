@@ -89,7 +89,7 @@ export const ProjectsSidebar=[
         prefix: "Interview/",
         collapsible: true,
         children: [
-            "Golang基础","微服务","开源框架","中间件及数据库","开发与调试工具","云原生","Liunx"
+            "腾讯 WXG 技术架构团队 （一面）"
         ],
     },
 ]
