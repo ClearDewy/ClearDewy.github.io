@@ -4,7 +4,6 @@
 
 电话面试，上来先是5道题
 
-![image-20240206194253318](C:\Users\12131\AppData\Roaming\Typora\typora-user-images\image-20240206194253318.png)
 
 ```c++
 struct Node {
@@ -36,7 +35,6 @@ Node* solve(Node* A, Node* B) {
 }
 ```
 
-![image-20240206194307934](C:\Users\12131\AppData\Roaming\Typora\typora-user-images\image-20240206194307934.png)
 
 当时写的代码是
 
@@ -86,7 +84,6 @@ int cal(int A1, int A2, int B1, int B2, int C1, int C2) {
 }
 ```
 
-![image-20240206194331860](C:\Users\12131\AppData\Roaming\Typora\typora-user-images\image-20240206194331860.png)
 
 刚开始把题意理解错了，以为是两个数组格各选一个拼成第k大的数（脑子真是抽了）。后面面试官提示了现场想了一个二分大概，补充一下正确代码
 
@@ -115,7 +112,6 @@ int FindKth(int n, int m, int k) {
 }
 ```
 
-![image-20240206194345355](C:\Users\12131\AppData\Roaming\Typora\typora-user-images\image-20240206194345355.png)
 
 ```c++
 int cap=2;
@@ -146,7 +142,6 @@ int set(int key,int val){
 }
 ```
 
-![image-20240206194359212](C:\Users\12131\AppData\Roaming\Typora\typora-user-images\image-20240206194359212.png)
 
 很综合的一道题，什么都考了。
 
@@ -202,7 +197,6 @@ B+树索引的具体内容存储取决于索引的类型。对于主键索引（
 
 算法题三道
 
-![image-20240222210753616](C:\Users\12131\AppData\Roaming\Typora\typora-user-images\image-20240222210753616.png)
 
 O(n)做法
 
@@ -211,17 +205,6 @@ O(n)做法
 ```
 
 要求需要比O(n)更小
-
-![image-20240222210851268](C:\Users\12131\AppData\Roaming\Typora\typora-user-images\image-20240222210851268.png)
-
-
-
-
-
-![image-20240222210915032](C:\Users\12131\AppData\Roaming\Typora\typora-user-images\image-20240222210915032.png)
-
-
-
 
 
 项目：
