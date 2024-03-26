@@ -4,6 +4,7 @@
 
 电话面试，上来先是5道题
 
+![1](https://raw.githubusercontent.com/ClearDewy/TyporaImg/main/img/202403262345465.png)
 
 ```c++
 struct Node {
@@ -35,6 +36,7 @@ Node* solve(Node* A, Node* B) {
 }
 ```
 
+![2](https://raw.githubusercontent.com/ClearDewy/TyporaImg/main/img/202403262345926.png)
 
 当时写的代码是
 
@@ -84,6 +86,7 @@ int cal(int A1, int A2, int B1, int B2, int C1, int C2) {
 }
 ```
 
+![3](https://raw.githubusercontent.com/ClearDewy/TyporaImg/main/img/202403262345304.png)
 
 刚开始把题意理解错了，以为是两个数组格各选一个拼成第k大的数（脑子真是抽了）。后面面试官提示了现场想了一个二分大概，补充一下正确代码
 
@@ -112,6 +115,7 @@ int FindKth(int n, int m, int k) {
 }
 ```
 
+![4](https://raw.githubusercontent.com/ClearDewy/TyporaImg/main/img/202403262345607.png)
 
 ```c++
 int cap=2;
@@ -142,6 +146,7 @@ int set(int key,int val){
 }
 ```
 
+![5](https://raw.githubusercontent.com/ClearDewy/TyporaImg/main/img/202403262345156.png)
 
 很综合的一道题，什么都考了。
 
@@ -197,6 +202,7 @@ B+树索引的具体内容存储取决于索引的类型。对于主键索引（
 
 算法题三道
 
+![6](https://raw.githubusercontent.com/ClearDewy/TyporaImg/main/img/202403262345148.png)
 
 O(n)做法
 
@@ -205,6 +211,13 @@ O(n)做法
 ```
 
 要求需要比O(n)更小
+
+![7](https://raw.githubusercontent.com/ClearDewy/TyporaImg/main/img/202403262346245.png)
+
+
+
+![7](https://raw.githubusercontent.com/ClearDewy/TyporaImg/main/img/202403262346872.png)
+
 
 
 项目：
