@@ -89,7 +89,7 @@ export const ProjectsSidebar=[
         prefix: "Interview/",
         collapsible: true,
         children: [
-            "腾讯 WXG 技术架构团队 （一面）"
+            "腾讯 WXG 技术架构团队 （一面）","腾讯笔试（2024春）"
         ],
     },
 ]
