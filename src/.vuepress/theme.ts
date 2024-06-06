@@ -56,7 +56,7 @@ export default hopeTheme({
 
   encrypt: {
     config: {
-      "/Dewy-docs/": ["021107"],
+      "/Dewy-docs/": ["20021107"],
     },
   },
 
