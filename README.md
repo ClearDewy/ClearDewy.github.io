@@ -1,8 +1,183 @@
-# ClearDewy Knowledge Blog
+# Dewyx Knowledge Blog
 
-新的学习知识博客使用 VitePress 1.6 与 VitePress Theme Teek 构建。
+Dewyx 的个人学习知识库，使用 VitePress 1.6 与 VitePress Theme Teek 构建，发布到 <https://docs.dewyx.cn>。
 
-旧的 VuePress 项目完整保存在 `graduate` 分支；`master` 不再包含、构建或发布旧内容。
+这个博客写给作者自己。目标不是持续生产零散帖子，而是把学习、实验和工程经验沉淀为可以反复查阅、逐步连接、能够验证的系统知识。
+
+> 本 README 是项目结构和内容边界的设计基准。后续维护、自动化工具和其他 Codex 会话应先遵循这里的约定，不应自行增加一级专栏或改变内容归属。
+
+## 总体结构
+
+站点只保留三个一级知识专栏：
+
+| 专栏 | 路径 | 核心范围 |
+| --- | --- | --- |
+| 智能算法 | `/ai/` | 传统算法与模型、深度学习、LLM、训练、推理、Agent、Harness、评测 |
+| 系统工程 | `/systems/` | 编程语言、操作系统、网络、数据库、分布式系统、软件架构、DevOps、可靠性 |
+| 嵌入式 | `/embedded/` | 电子基础、MCU/SoC、固件、RTOS、驱动、通信协议、PCB、机器人与边缘智能 |
+
+首页、文章清单、归档、分类、标签和关于页面属于浏览与管理入口，不是新的知识专栏。
+
+首页采用 Teek 支持的 VitePress 原生 Hero + Features 布局，延续旧站“标题、标识和入口卡片”的知识门户结构，不展示普通文章流。导航栏使用作者头像作为站点图标，Hero 右侧知识轨道以作者头像为中心。桌面端导航将三个一级专栏放在左侧，将搜索、主题和外部链接放在右侧。更换主题前应优先通过 Teek 原生配置和少量样式解决，不为单一页面效果引入第二套主题。
+
+### 智能算法
+
+按智能系统的完整生命周期组织，而不是只按模型名称堆放文章：
+
+```text
+数学与算法基础
+  → 传统模型与深度学习
+  → 大语言模型
+  → 数据、训练与对齐
+  → 推理与模型服务
+  → Agent 与 Harness 工程
+  → 评测、安全与可观测性
+  → 应用
+```
+
+Harness 工程包含上下文管理、Tool Calling、Memory、RAG、状态机、工作流、多 Agent、权限与沙箱、人工审批、任务调度、Tracing 和 Evals。
+
+### 系统工程
+
+记录不依赖某个 AI 模型也能成立的通用计算机系统知识：
+
+```text
+语言与运行时
+  → 操作系统与网络
+  → 数据库、存储与后端服务
+  → 分布式系统与软件架构
+  → 云原生、交付与自动化
+  → 性能、可靠性、安全与可观测性
+```
+
+### 嵌入式
+
+从物理约束出发连接硬件、固件和完整设备：
+
+```text
+电子与数字电路
+  → MCU、SoC 与处理器
+  → 裸机程序、驱动与 RTOS
+  → 通信协议与系统集成
+  → PCB、调试与可靠性
+  → 机器人与边缘智能
+```
+
+## 内容归属规则
+
+一篇文章只选择一个主要归属，跨领域关系使用标签和链接表达，不复制多份正文。
+
+- 模型训练、模型推理、Agent、RAG、Harness 和 AI 评测归入“智能算法”。
+- 通用数据库、后端、分布式系统、基础设施和工程方法归入“系统工程”。
+- 芯片、电路、固件、驱动、设备通信和实体设备归入“嵌入式”。
+- 端侧 AI 的模型方法归入“智能算法”，设备部署、功耗、驱动和硬件集成归入“嵌入式”，双方互相链接。
+- Python、C++、Rust、Linux、Docker 等是技术标签或二级主题，不新增为一级专栏。
+- 无法确定归属时，按文章要解决的主要问题决定，而不是按使用的编程语言决定。
+
+## 内容组织规则
+
+- 新内容应先在对应专栏的 `roadmap.md` 中找到位置；没有位置时先更新知识地图。
+- `index.md` 说明专栏定位和边界，`roadmap.md` 维护长期知识结构，具体文章承载结论和实践。
+- 优先补齐概念之间的连接、前置知识和验证方法，避免只生成孤立的“入门介绍”。
+- 文章应尽量说明问题、结论、推导或验证方式、适用条件和失效边界。
+- 事实观察、实验结果和个人判断应明确区分；环境相关结论注明版本与日期。
+- 旧 VuePress 内容完整保存在 `graduate` 分支，除非作者明确要求，不自动迁回 `master`。
+
+推荐的文章 frontmatter：
+
+```yaml
+---
+title: 文章标题
+date: YYYY-MM-DD
+categories:
+  - 智能算法 # 或：系统工程、嵌入式
+tags:
+  - 具体技术标签
+description: 一句话说明文章解决的问题。
+---
+```
+
+三个专栏总览和知识地图使用 `article: false`，避免作为普通文章进入首页信息流。
+
+## 目录约定
+
+```text
+docs/
+├── ai/                  # 智能算法
+│   ├── index.md
+│   └── roadmap.md
+├── systems/             # 系统工程
+│   ├── index.md
+│   └── roadmap.md
+├── embedded/            # 嵌入式
+│   ├── index.md
+│   └── roadmap.md
+├── guide/               # 知识库自身的使用说明
+├── public/              # 静态资源
+└── .vitepress/          # VitePress 与 Teek 配置
+    └── theme/components/interactive/ # 可复用交互组件
+examples/                # 可由 CI 执行的完整示例
+```
+
+当某个专栏内容增多时，可以在专栏内按知识地图增加二级目录，但 URL 应保持语义清晰，避免按日期或临时项目名建立长期目录。
+
+## 可运行示例
+
+- `examples/` 中的脚本必须在 GitHub Actions 构建前执行。
+- 关键示例应确定性运行，固定外部依赖，不依赖随机网络响应或私密凭据。
+- 文章可以使用全局组件 `<PythonPlayground />` 在浏览器内运行轻量 Python 代码。
+- Pyodide 只适合演示、标准库练习和轻量计算；系统服务、驱动、私有数据和长任务应使用仓库脚本或独立环境验证。
+- 文章展示的输出应与仓库中被 CI 验证的脚本保持一致。
+
+## 交互式知识组件
+
+站点已经提供统一的开源可视化能力。新增文章应优先复用现有组件，不为同一用途重复引入另一套库。
+
+| Vue 组件 | 开源实现 | 主要用途 |
+| --- | --- | --- |
+| `MermaidDiagram` | Mermaid | 流程图、时序图、状态图、架构图 |
+| `InteractiveChart` | Apache ECharts + Vue ECharts | 训练曲线、实验指标和数据对比 |
+| `D3Tree` | D3 | 自定义树、图和数据驱动 SVG |
+| `CodeEditor` | CodeMirror 6 | 可编辑代码与语法高亮 |
+| `PythonPlayground` | CodeMirror 6 + Pyodide | 浏览器内运行轻量 Python |
+| `AlgorithmCanvas` | Konva + Vue Konva | 算法步骤和高频二维动画 |
+| `MotionSequence` | Motion for Vue | 状态变化、步骤和轻量交互动画 |
+| `FlowDiagram` | Vue Flow | Agent Harness、协议和分布式工作流 |
+| `WaveformDiagram` | WaveDrom | 数字逻辑与嵌入式通信时序 |
+| `ThreeScene` | Three.js + TresJS | 三维结构、机器人和空间算法 |
+
+Markdown 数学公式使用 VitePress 的 MathJax 支持。组件实例和效果集中在 `docs/guide/interactive-components.md`。
+
+使用约束：
+
+- 交互组件已在主题中异步注册，不要改成全量同步导入。
+- 汇总演示页使用 `LazyDemo` 在组件接近视口时自动异步装载，不能改回同页首屏同时挂载所有重量级引擎。
+- 在 Markdown 中使用浏览器交互组件时包裹 `<ClientOnly>`。
+- 公式和静态关系优先用 MathJax 或 Mermaid，普通统计图优先用 ECharts。
+- D3 用于需要自定义数据绑定的 SVG；Konva 用于高频 Canvas 绘制。
+- Agent 和系统状态图优先用 Vue Flow，硬件数字时序优先用 WaveDrom。
+- Three.js 只用于空间关系确实影响理解的内容。
+- 动画必须尊重 `prefers-reduced-motion`，并提供文字解释或静态回退，不能成为唯一信息来源。
+- 传给 Mermaid、WaveDrom 或图表组件的定义应来自仓库内可信内容，不渲染访客提交的任意文本。
+
+## 修改导航时
+
+任何结构调整都应同时检查：
+
+1. `docs/.vitepress/config.ts` 中的导航和侧边栏；
+2. 对应专栏的 `index.md` 与 `roadmap.md`；
+3. 首页、文章分类和已有内部链接；
+4. 本 README 的总体设计；
+5. 旧 URL 是否需要保留迁移提示。
+
+不要仅修改菜单名称而不更新内容边界，也不要只创建文章文件而不把它接入知识地图。
+
+路由保持以下约束：
+
+- 一级专栏使用 VitePress 原生目录地址 `/ai/`、`/systems/`、`/embedded/`，链接保留末尾斜杠。
+- 不在 frontmatter 中增加与文件原生路径等价的 `permalink`。
+- `vitePlugins.permalink` 与 `vitePlugins.sidebar` 保持关闭；前者会在 SPA 路由钩子中产生嵌套跳转，后者会覆盖手写侧边栏。
+- 专栏侧边栏只在 `docs/.vitepress/config.ts` 维护，避免自动配置与手写配置并存。
 
 ## 本地开发
 
@@ -11,7 +186,7 @@ npm ci
 npm run docs:dev
 ```
 
-构建与预览：
+发布前验证：
 
 ```bash
 npm run check:python
@@ -19,10 +194,6 @@ npm run docs:build
 npm run docs:preview
 ```
 
-文章放在 `docs/` 下。需要进入首页文章流的 Markdown 文件应包含 `date`、`categories` 和 `tags` frontmatter。
+`docs/.vitepress/dist` 已从开发服务器监听范围中排除，因此开发服务运行时执行生产构建不会触发构建产物的 HMR 风暴。需要稳定检查最终页面时优先使用 `npm run docs:preview`。
 
-## Python 示例
-
-- `examples/python/` 中的脚本会在 GitHub Actions 构建前执行。
-- 文章可使用全局组件 `<PythonPlayground />` 在浏览器内运行不含敏感信息的 Python 代码。
-- 浏览器运行时由 Pyodide 提供，首次运行需要下载运行环境。
+GitHub Actions 从 `master` 构建并发布站点。GitHub Pages 的 Source 必须保持为 **GitHub Actions**，不能切换回 `gh-pages` 分支发布。

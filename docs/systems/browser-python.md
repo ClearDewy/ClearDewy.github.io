@@ -1,10 +1,10 @@
 ---
 title: 在浏览器运行 Python
 date: 2026-09-02
-permalink: /python/browser-runtime
 categories:
-  - Python
+  - 系统工程
 tags:
+  - Python
   - Pyodide
   - WebAssembly
 top: true

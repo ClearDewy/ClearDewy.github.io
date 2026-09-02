@@ -1,9 +1,8 @@
 ---
 title: 可复现的代码示例
 date: 2026-09-02
-permalink: /engineering/reproducible-examples
 categories:
-  - 工程实践
+  - 系统工程
 tags:
   - CI
   - Python

@@ -2,4 +2,53 @@
 layout: home
 article: false
 sidebar: false
+titleTemplate: false
+description: 围绕智能算法、系统工程与嵌入式持续构建的个人学习知识库。
+
+hero:
+  name: Dewyx
+  text: 把知识连接成系统
+  tagline: 从原理到实现，从实验到系统。持续整理智能算法、系统工程与嵌入式的学习地图。
+  image:
+    src: /knowledge-orbit.svg
+    alt: 智能算法、系统工程与嵌入式组成的知识轨道
+  actions:
+    - theme: brand
+      text: 进入知识地图
+      link: /guide/start
+    - theme: alt
+      text: 查看交互实验
+      link: /guide/interactive-components
+
+features:
+  - icon: 🧠
+    title: 智能算法
+    details: 传统模型、深度学习、LLM、训练与推理、Agent、Harness 和评测。
+    link: /ai/
+    linkText: 打开专栏
+  - icon: ⬡
+    title: 系统工程
+    details: 操作系统、网络、数据库、分布式系统、软件架构、交付与可靠性。
+    link: /systems/
+    linkText: 打开专栏
+  - icon: ⚡
+    title: 嵌入式
+    details: 电子基础、MCU 与 SoC、固件、RTOS、通信、PCB 和机器人。
+    link: /embedded/
+    linkText: 打开专栏
+  - icon: 🗺️
+    title: 系统性知识地图
+    details: 每篇内容先进入专栏知识地图，再连接前置知识、实现路径与验证边界。
+    link: /guide/start
+    linkText: 了解组织方式
+  - icon: ◉
+    title: 可交互实验
+    details: 用公式、图表、Canvas、工作流、数字波形和三维场景辅助理解。
+    link: /guide/interactive-components
+    linkText: 查看能力
+  - icon: ⌘
+    title: 可运行与可复现
+    details: 轻量 Python 可在浏览器执行，关键示例则由 CI 在发布前验证。
+    link: /systems/reproducible-examples
+    linkText: 查看方法
 ---

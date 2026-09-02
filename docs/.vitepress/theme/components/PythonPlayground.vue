@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
+import CodeEditor from "./interactive/CodeEditor.vue";
 
 const props = withDefaults(
   defineProps<{
@@ -66,7 +67,7 @@ async function run() {
         {{ buttonText }}
       </button>
     </header>
-    <textarea v-model="source" aria-label="Python 源代码" spellcheck="false" />
+    <CodeEditor v-model="source" language="python" label="Python 源代码" />
     <pre :class="{ 'is-error': state === 'error' }" aria-live="polite">{{ output }}</pre>
     <p>运行环境由 Pyodide 下载到本地浏览器；不要在代码中填写密码或令牌。</p>
   </section>
