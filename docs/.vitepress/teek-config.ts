@@ -62,5 +62,18 @@ export const teekConfig = defineTeekConfig({
   themeEnhance: {
     enabled: true,
     position: "top",
+    layoutSwitch: {
+      defaultMode: "bothWidthAdjustable",
+      defaultPageMaxWidth: 90,
+      defaultDocMaxWidth: 95,
+    },
+    themeColor: {
+      defaultColorName: "ep-primary",
+      defaultSpread: false,
+    },
+    spotlight: {
+      defaultValue: true,
+      defaultStyle: "aside",
+    },
   },
 });
