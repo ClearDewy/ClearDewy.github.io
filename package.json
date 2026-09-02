@@ -1,18 +1,24 @@
 {
-  "name": "Dewy-Wiki",
-  "version": "2.0.0",
-  "description": "ClearDewy's own Wiki and blog",
+  "name": "cleardewy-knowledge-blog",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "ClearDewy's learning notes and knowledge blog",
   "license": "MIT",
   "scripts": {
-    "docs:build": "vuepress build src",
-    "docs:clean-dev": "vuepress dev src --clean-cache",
-    "docs:dev": "vuepress dev src"
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "check:python": "python3 examples/python/quickstart.py"
+  },
+  "dependencies": {
+    "vitepress-theme-teek": "1.6.2",
+    "vue": "3.5.20"
   },
   "devDependencies": {
-    "@vuepress/client": "2.0.0-beta.60",
-    "@vuepress/plugin-search": "2.0.0-beta.60",
-    "vue": "^3.2.45",
-    "vuepress": "2.0.0-beta.60",
-    "vuepress-theme-hope": "2.0.0-beta.146"
+    "vitepress": "1.6.4"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

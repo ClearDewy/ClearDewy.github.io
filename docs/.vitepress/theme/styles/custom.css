@@ -1,0 +1,85 @@
+:root {
+  --vp-c-brand-1: #0f766e;
+  --vp-c-brand-2: #0d9488;
+  --vp-c-brand-3: #14b8a6;
+  --vp-c-brand-soft: rgba(20, 184, 166, 0.14);
+}
+
+.python-playground {
+  overflow: hidden;
+  margin: 24px 0;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 14px;
+  background: var(--vp-c-bg-soft);
+  box-shadow: 0 12px 34px rgba(15, 23, 42, 0.08);
+}
+
+.python-playground__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+.python-playground__header div {
+  display: grid;
+  gap: 2px;
+}
+
+.python-playground__header span,
+.python-playground > p {
+  color: var(--vp-c-text-2);
+  font-size: 12px;
+}
+
+.python-playground button {
+  min-width: 92px;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 999px;
+  color: white;
+  background: var(--vp-c-brand-1);
+  cursor: pointer;
+  font-weight: 650;
+}
+
+.python-playground button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.python-playground textarea {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 210px;
+  resize: vertical;
+  padding: 16px;
+  border: 0;
+  outline: 0;
+  color: var(--vp-code-block-color);
+  background: var(--vp-code-block-bg);
+  font: 14px/1.65 var(--vp-font-family-mono);
+  tab-size: 4;
+}
+
+.python-playground pre {
+  min-height: 58px;
+  margin: 0;
+  padding: 14px 16px;
+  white-space: pre-wrap;
+  color: var(--vp-c-text-1);
+  background: var(--vp-c-bg);
+  font-size: 13px;
+}
+
+.python-playground pre.is-error {
+  color: var(--vp-c-danger-1);
+}
+
+.python-playground > p {
+  margin: 0;
+  padding: 10px 16px 12px;
+}
