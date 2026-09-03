@@ -156,7 +156,7 @@ export default defineConfig({
     socialLinks: [{ icon: "github", link: "https://github.com/ClearDewy" }],
     editLink: {
       text: "在 GitHub 上编辑此页",
-      pattern: "https://github.com/ClearDewy/ClearDewy.github.io/edit/master/docs/:path",
+      pattern: "https://github.com/ClearDewy/docs/edit/master/docs/:path",
     },
   },
 });
