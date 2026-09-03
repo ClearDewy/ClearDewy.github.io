@@ -68,7 +68,7 @@ $$
 
 需要执行 Python 时，继续使用集成 CodeMirror 和 Pyodide 的完整组件：
 
-<LazyDemo title="浏览器 Python" description="编辑器滚动到附近时加载；Pyodide 仅在点击运行后下载。">
+<LazyDemo title="浏览器 Python" description="编辑器滚动到附近时，Pyodide 与默认机器学习依赖会在后台异步加载。">
   <ClientOnly>
     <PythonPlayground title="可运行的 Python 示例" />
   </ClientOnly>

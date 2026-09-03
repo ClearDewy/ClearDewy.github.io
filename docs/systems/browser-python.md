@@ -19,7 +19,9 @@ GitHub Pages 没有服务端运行环境，但可以通过 WebAssembly 把 Pytho
 
 ## 适用范围
 
-这种方式适合算法演示、标准库练习和轻量数据处理。首次运行需要下载解释器，因此不会像本地 Python 一样立即启动。
+这种方式适合算法演示、标准库练习和轻量数据处理。组件挂载后会异步下载解释器和默认依赖，因此首次进入时不会像本地 Python 一样立即可用。
+
+默认环境包含 NumPy、Pandas、SciPy、Matplotlib、scikit-learn、XGBoost 和 LightGBM。页面上的多个运行器共享同一个 Python 运行时，避免重复初始化和下载。
 
 不适合以下场景：
 
@@ -35,6 +37,16 @@ GitHub Pages 没有服务端运行环境，但可以通过 WebAssembly 把 Pytho
 <PythonPlayground
   title="质数实验"
   :code="`numbers = [n for n in range(2, 30) if all(n % d for d in range(2, int(n ** 0.5) + 1))]\nprint(numbers)`"
+/>
+```
+
+文章需要默认集合之外的 Pyodide 官方包时，可以通过 `packages` 显式声明：
+
+```html
+<PythonPlayground
+  title="符号计算"
+  :packages="['sympy']"
+  :code="`import sympy as sp\nx = sp.symbols('x')\nprint(sp.diff(sp.sin(x), x))`"
 />
 ```
 
