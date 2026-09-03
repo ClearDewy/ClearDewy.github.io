@@ -1,6 +1,7 @@
 import Teek from "vitepress-theme-teek";
 import "vitepress-theme-teek/index.css";
 import { defineAsyncComponent } from "vue";
+import Layout from "./Layout.vue";
 import "./styles/custom.css";
 
 const components = {
@@ -19,6 +20,7 @@ const components = {
 
 export default {
   extends: Teek,
+  Layout,
   enhanceApp({ app }) {
     Object.entries(components).forEach(([name, loader]) => {
       app.component(name, defineAsyncComponent(loader));

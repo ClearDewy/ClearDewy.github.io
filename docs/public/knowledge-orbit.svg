@@ -1,20 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 560" role="img" aria-labelledby="title desc">
-  <title id="title">ClearDewy 知识轨道</title>
+  <title id="title">Dewyx 知识轨道</title>
   <desc id="desc">智能算法、系统工程和嵌入式三个知识领域围绕核心相互连接。</desc>
   <defs>
-    <linearGradient id="core" x1="120" y1="90" x2="440" y2="470" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#2dd4bf"/>
-      <stop offset=".52" stop-color="#0d9488"/>
-      <stop offset="1" stop-color="#0f766e"/>
-    </linearGradient>
     <linearGradient id="orbit" x1="70" y1="65" x2="490" y2="495" gradientUnits="userSpaceOnUse">
       <stop stop-color="#5eead4" stop-opacity=".88"/>
       <stop offset=".5" stop-color="#38bdf8" stop-opacity=".42"/>
       <stop offset="1" stop-color="#818cf8" stop-opacity=".72"/>
     </linearGradient>
-    <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%">
-      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#0f172a" flood-opacity=".2"/>
-    </filter>
     <clipPath id="avatar-clip">
       <circle cx="280" cy="280" r="72"/>
     </clipPath>
@@ -25,7 +17,6 @@
   <ellipse cx="280" cy="280" rx="222" ry="108" fill="none" stroke="url(#orbit)" stroke-width="2.5" transform="rotate(48 280 280)" opacity=".72"/>
 
   <path d="M280 139 402 351 158 351Z" fill="none" stroke="#99f6e4" stroke-width="2" stroke-opacity=".48"/>
-  <circle cx="280" cy="280" r="92" fill="url(#core)" filter="url(#shadow)"/>
   <image
     x="208"
     y="208"
@@ -35,8 +26,6 @@
     preserveAspectRatio="xMidYMid slice"
     clip-path="url(#avatar-clip)"
   />
-  <circle cx="280" cy="280" r="73" fill="none" stroke="#ccfbf1" stroke-width="4" stroke-opacity=".92"/>
-
   <g font-family="ui-sans-serif, system-ui, sans-serif" text-anchor="middle">
     <g transform="translate(280 112)">
       <circle r="45" fill="#0f172a" stroke="#5eead4" stroke-width="3"/>
