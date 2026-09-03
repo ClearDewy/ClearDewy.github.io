@@ -9,8 +9,8 @@ const avatarUrl = "https://avatars.githubusercontent.com/u/93588007?s=512&v=4";
 
 export default defineConfig({
   extends: teekConfig,
-  title: "Dewyx",
-  titleTemplate: ":title · Dewyx",
+  title: "Dewyx Docs",
+  titleTemplate: ":title · Dewyx Docs",
   description,
   lang: "zh-CN",
   cleanUrls: true,
@@ -24,7 +24,7 @@ export default defineConfig({
     ["meta", { name: "author", content: "Dewyx" }],
     ["meta", { property: "og:type", content: "website" }],
     ["meta", { property: "og:locale", content: "zh-CN" }],
-    ["meta", { property: "og:site_name", content: "Dewyx" }],
+    ["meta", { property: "og:site_name", content: "Dewyx Docs" }],
     ["meta", { property: "og:image", content: avatarUrl }],
     ["meta", { property: "og:url", content: siteUrl }],
     ["meta", { property: "og:description", content: description }],

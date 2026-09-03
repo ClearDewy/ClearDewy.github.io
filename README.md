@@ -1,4 +1,4 @@
-# Dewyx Knowledge Blog
+# Dewyx Docs
 
 Dewyx 的个人学习知识库，使用 VitePress 1.6 与 VitePress Theme Teek 构建，发布到 <https://docs.dewyx.cn>。
 

@@ -6,7 +6,7 @@ titleTemplate: false
 description: 围绕智能算法、系统工程与嵌入式持续构建的个人学习知识库。
 
 hero:
-  name: Dewyx
+  name: Dewyx Docs
   text: 把知识连接成系统
   tagline: 从原理到实现，从实验到系统。持续整理智能算法、系统工程与嵌入式的学习地图。
   image:
