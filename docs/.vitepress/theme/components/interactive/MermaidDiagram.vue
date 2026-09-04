@@ -39,6 +39,7 @@ async function renderDiagram() {
     const { svg, bindFunctions } = await mermaid.render(id, props.code);
     if (currentVersion !== renderVersion || !container.value) return;
     container.value.innerHTML = svg;
+    container.value.querySelector("svg")?.setAttribute("aria-label", props.title);
     bindFunctions?.(container.value);
   } catch (reason) {
     error.value = reason instanceof Error ? reason.message : String(reason);
@@ -58,7 +59,12 @@ onBeforeUnmount(() => observer?.disconnect());
 <template>
   <figure class="interactive-card mermaid-diagram">
     <figcaption>{{ title }}</figcaption>
-    <div ref="container" class="mermaid-diagram__canvas" />
+    <div
+      ref="container"
+      class="mermaid-diagram__canvas"
+      tabindex="0"
+      :aria-label="`${title}，可滚动查看完整图表`"
+    />
     <p v-if="error" class="interactive-error">{{ error }}</p>
   </figure>
 </template>
@@ -75,5 +81,21 @@ onBeforeUnmount(() => observer?.disconnect());
 .mermaid-diagram__canvas :deep(svg) {
   max-width: 100%;
   height: auto;
+}
+
+.mermaid-diagram__canvas:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: -2px;
+}
+
+@media (max-width: 640px) {
+  .mermaid-diagram__canvas {
+    place-items: center start;
+  }
+
+  .mermaid-diagram__canvas :deep(svg) {
+    min-width: 560px;
+    max-width: none;
+  }
 }
 </style>

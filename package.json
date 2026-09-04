@@ -6,6 +6,7 @@
   "description": "Dewyx's learning notes and knowledge blog",
   "license": "MIT",
   "scripts": {
+    "postinstall": "patch-package",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
@@ -35,6 +36,7 @@
     "@types/d3": "^7.4.3",
     "@types/three": "^0.185.4",
     "markdown-it-mathjax3": "^4.3.2",
+    "patch-package": "^8.0.1",
     "vitepress": "1.6.4"
   },
   "overrides": {

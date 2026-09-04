@@ -4,7 +4,7 @@ import { fileURLToPath, URL } from "node:url";
 import { teekConfig } from "./teek-config";
 
 const siteUrl = "https://docs.dewyx.cn";
-const description = "围绕智能算法、系统工程与嵌入式持续整理的个人知识库。";
+const description = "围绕智能算法、系统工程、嵌入式与量化研究持续整理的个人知识库。";
 const avatarUrl = "https://avatars.githubusercontent.com/u/93588007?s=512&v=4";
 
 export default defineConfig({
@@ -61,7 +61,6 @@ export default defineConfig({
         "d3",
         "echarts",
         "konva",
-        "mermaid",
         "motion-v",
         "three",
         "vue-echarts",
@@ -83,6 +82,7 @@ export default defineConfig({
       { text: "智能算法", link: "/ai/" },
       { text: "系统工程", link: "/systems/" },
       { text: "嵌入式", link: "/embedded/" },
+      { text: "量化研究", link: "/quant/" },
       {
         text: "索引",
         items: [
@@ -119,6 +119,30 @@ export default defineConfig({
             { text: "知识地图", link: "/ai/roadmap" },
           ],
         },
+        {
+          text: "模型原理",
+          items: [
+            { text: "0. 数学、张量与优化", link: "/ai/foundations" },
+            { text: "1. 学习问题与经典机器学习", link: "/ai/machine-learning" },
+            { text: "2. 神经网络与表示学习", link: "/ai/deep-learning" },
+            { text: "3. 序列、注意力与 Transformer", link: "/ai/transformers" },
+            { text: "4. 基础模型与生成模型", link: "/ai/foundation-models" },
+          ],
+        },
+        {
+          text: "训练与系统",
+          items: [
+            { text: "5. 数据、训练与对齐", link: "/ai/data-training-alignment" },
+            { text: "6. 推理、评测与安全", link: "/ai/inference-evaluation-safety" },
+            { text: "7. 检索、Agent 与智能系统", link: "/ai/agents-and-systems" },
+          ],
+        },
+        {
+          text: "项目实战",
+          items: [
+            { text: "MiniMind 全链路实践", link: "/ai/minimind-practice" },
+          ],
+        },
       ],
       "/systems/": [
         {
@@ -142,6 +166,15 @@ export default defineConfig({
           items: [
             { text: "专栏总览", link: "/embedded/" },
             { text: "知识地图", link: "/embedded/roadmap" },
+          ],
+        },
+      ],
+      "/quant/": [
+        {
+          text: "量化研究",
+          items: [
+            { text: "专栏总览", link: "/quant/" },
+            { text: "知识地图", link: "/quant/roadmap" },
           ],
         },
       ],

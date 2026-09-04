@@ -3,15 +3,15 @@ layout: home
 article: false
 sidebar: false
 titleTemplate: false
-description: 围绕智能算法、系统工程与嵌入式持续构建的个人学习知识库。
+description: 围绕智能算法、系统工程、嵌入式与量化研究持续构建的个人学习知识库。
 
 hero:
   name: Dewyx Docs
   text: 把知识连接成系统
-  tagline: 从原理到实现，从实验到系统。持续整理智能算法、系统工程与嵌入式的学习地图。
+  tagline: 从原理到实现，从实验到系统。持续整理智能算法、系统工程、嵌入式与量化研究的学习地图。
   image:
     src: /knowledge-orbit.svg
-    alt: 智能算法、系统工程与嵌入式组成的知识轨道
+    alt: 智能算法、系统工程、嵌入式与量化研究组成的知识轨道
   actions:
     - theme: brand
       text: 进入知识地图
@@ -35,6 +35,11 @@ features:
     title: 嵌入式
     details: 电子基础、MCU 与 SoC、固件、RTOS、通信、PCB 和机器人。
     link: /embedded/
+    linkText: 打开专栏
+  - icon: 📈
+    title: 量化研究
+    details: 市场与统计、点时数据、因子证据、样本外验证、风险成本、组合与执行。
+    link: /quant/
     linkText: 打开专栏
   - icon: 🗺️
     title: 系统性知识地图

@@ -1,0 +1,60 @@
+diff --git a/node_modules/vitepress-theme-teek/es/components/common/article-page/src/components/outline.mjs b/node_modules/vitepress-theme-teek/es/components/common/article-page/src/components/outline.mjs
+index 4ee813c..56ea551 100644
+--- a/node_modules/vitepress-theme-teek/es/components/common/article-page/src/components/outline.mjs
++++ b/node_modules/vitepress-theme-teek/es/components/common/article-page/src/components/outline.mjs
+@@ -88,17 +88,20 @@ const useActiveAnchor = (container, marker) => {
+     activateLink(activeLink);
+   }
+   function activateLink(hash) {
++    const containerElement = container.value;
++    const markerElement = marker.value;
++    if (!containerElement || !markerElement) return;
+     if (prevActiveLink) prevActiveLink.classList.remove("active");
+     if (hash == null) prevActiveLink = null;
+-    else prevActiveLink = container.value.querySelector(`a[href="${decodeURIComponent(hash)}"]`);
++    else prevActiveLink = containerElement.querySelector(`a[href="${decodeURIComponent(hash)}"]`);
+     const activeLink = prevActiveLink;
+     if (activeLink) {
+       activeLink.classList.add("active");
+-      marker.value.style.top = activeLink.offsetTop + 39 + "px";
+-      marker.value.style.opacity = "1";
++      markerElement.style.top = activeLink.offsetTop + 39 + "px";
++      markerElement.style.opacity = "1";
+     } else {
+-      marker.value.style.top = "33px";
+-      marker.value.style.opacity = "0";
++      markerElement.style.top = "33px";
++      markerElement.style.opacity = "0";
+     }
+   }
+ };
+diff --git a/node_modules/vitepress-theme-teek/lib/components/common/article-page/src/components/outline.js b/node_modules/vitepress-theme-teek/lib/components/common/article-page/src/components/outline.js
+index ece5514..4e12cb7 100644
+--- a/node_modules/vitepress-theme-teek/lib/components/common/article-page/src/components/outline.js
++++ b/node_modules/vitepress-theme-teek/lib/components/common/article-page/src/components/outline.js
+@@ -90,17 +90,20 @@ const useActiveAnchor = (container, marker) => {
+     activateLink(activeLink);
+   }
+   function activateLink(hash) {
++    const containerElement = container.value;
++    const markerElement = marker.value;
++    if (!containerElement || !markerElement) return;
+     if (prevActiveLink) prevActiveLink.classList.remove("active");
+     if (hash == null) prevActiveLink = null;
+-    else prevActiveLink = container.value.querySelector(`a[href="${decodeURIComponent(hash)}"]`);
++    else prevActiveLink = containerElement.querySelector(`a[href="${decodeURIComponent(hash)}"]`);
+     const activeLink = prevActiveLink;
+     if (activeLink) {
+       activeLink.classList.add("active");
+-      marker.value.style.top = activeLink.offsetTop + 39 + "px";
+-      marker.value.style.opacity = "1";
++      markerElement.style.top = activeLink.offsetTop + 39 + "px";
++      markerElement.style.opacity = "1";
+     } else {
+-      marker.value.style.top = "33px";
+-      marker.value.style.opacity = "0";
++      markerElement.style.top = "33px";
++      markerElement.style.opacity = "0";
+     }
+   }
+ };

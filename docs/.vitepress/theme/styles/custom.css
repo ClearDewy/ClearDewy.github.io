@@ -152,8 +152,14 @@ html[theme-color="ep-primary"] {
   transform: translateY(-5px);
 }
 
-.VPHomeFeatures .item:nth-child(-n + 3) .VPFeature {
+.VPHomeFeatures .item:nth-child(-n + 4) .VPFeature {
   border-top: 3px solid var(--vp-c-brand-2);
+}
+
+@media (min-width: 960px) {
+  .VPHomeFeatures .item.grid-4:nth-child(n + 5) {
+    width: calc(100% / 3);
+  }
 }
 
 .VPHomeFeatures .VPFeature .icon {

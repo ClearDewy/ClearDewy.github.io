@@ -11,6 +11,7 @@ const components = {
   D3Tree: () => import("./components/interactive/D3Tree.vue"),
   CodeEditor: () => import("./components/interactive/CodeEditor.vue"),
   AlgorithmCanvas: () => import("./components/interactive/AlgorithmCanvas.vue"),
+  AttentionShapeDemo: () => import("./components/interactive/AttentionShapeDemo.vue"),
   MotionSequence: () => import("./components/interactive/MotionSequence.vue"),
   ThreeScene: () => import("./components/interactive/ThreeScene.vue"),
   FlowDiagram: () => import("./components/interactive/FlowDiagram.vue"),
