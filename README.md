@@ -28,8 +28,8 @@ Dewyx 的个人学习知识库，使用 VitePress 1.6 与 VitePress Theme Teek �
 按“模型原理主线 + 智能系统生命周期”组织，不按热门模型或单个开源项目的目录堆放文章：
 
 ```text
-数学、张量与优化基础
-  → 学习问题与经典机器学习
+模型计算与优化基础
+  → 机器学习与泛化评估
   → 神经网络与表示学习
   → 序列、注意力与 Transformer
   → 基础模型与生成模型
@@ -38,7 +38,7 @@ Dewyx 的个人学习知识库，使用 VitePress 1.6 与 VitePress Theme Teek �
   → 检索、Agent 与智能系统
 ```
 
-智能算法采用少量大章节：每篇文章覆盖一个完整知识块，小节在文章内部按依赖顺序组织。MiniMind 等项目位于实战层，用于验证多个章节中的概念，不作为知识目录。Harness 工程包含上下文管理、Tool Calling、Memory、RAG、状态机、工作流、多 Agent、权限与沙箱、人工审批、任务调度、Tracing 和 Evals。
+智能算法采用“章节导览 + 学习单元”的两级结构：稳定的章节 URL 负责范围、依赖和过关标准；lesson、lab、reference、case-study、review 分别承担教学、验证、查询、案例和验收。MiniMind 等项目位于实战层，用于验证多个章节中的概念，不作为知识目录。Harness 工程包含上下文管理、Tool Calling、Memory、RAG、状态机、工作流、多 Agent、权限与沙箱、人工审批、任务调度、Tracing 和 Evals。
 
 ### 系统工程
 
@@ -97,9 +97,10 @@ Dewyx 的个人学习知识库，使用 VitePress 1.6 与 VitePress Theme Teek �
 
 ## 内容组织规则
 
+- 详细的信息架构、内容类型、教学闭环、动画、成熟度和质量门禁以[知识文档体系规范](docs/guide/knowledge-documentation-standard.md)为准。
 - 新内容应先在对应专栏的 `roadmap.md` 中找到位置；没有位置时先更新知识地图。
 - `index.md` 说明专栏定位和边界，`roadmap.md` 维护长期知识结构，具体文章承载结论和实践。
-- 智能算法专栏的一篇文章对应一个完整知识块，张量、反向传播、注意力等课程小节优先保留在所属大章节内部，避免为每个学习步骤创建孤立文章。
+- 智能算法保留稳定章节导览；当一个主题有独立问题、先修、目标和验收方式时，拆成可在一次连续学习中完成的学习单元，并由章节页串回主线。
 - 优先补齐概念之间的连接、前置知识和验证方法，避免只生成孤立的“入门介绍”。
 - 文章应尽量说明问题、结论、推导或验证方式、适用条件和失效边界。
 - 事实观察、实验结果和个人判断应明确区分；环境相关结论注明版本与日期。
@@ -111,6 +112,9 @@ Dewyx 的个人学习知识库，使用 VitePress 1.6 与 VitePress Theme Teek �
 ---
 title: 文章标题
 date: YYYY-MM-DD
+type: lesson # overview / lesson / lab / reference / case-study / review
+status: draft # outline / draft / learnable / verified / stale
+track: ai # systems / embedded / quant / guide
 categories:
   - 智能算法 # 或：系统工程、嵌入式、量化研究
 tags:
@@ -118,6 +122,8 @@ tags:
 description: 一句话说明文章解决的问题。
 ---
 ```
+
+`lesson`、`lab`、`review` 还必须声明 `prerequisites`、`outcomes` 和 `estimated`；完整含义与模板以规范页为准。
 
 四个专栏总览和知识地图使用 `article: false`，避免作为普通文章进入首页信息流。
 
@@ -127,7 +133,10 @@ description: 一句话说明文章解决的问题。
 docs/
 ├── ai/                  # 智能算法
 │   ├── index.md
-│   └── roadmap.md
+│   ├── roadmap.md
+│   ├── foundations.md   # 稳定章节导览 URL
+│   ├── foundations/     # lesson / lab / reference / review
+│   └── transformers/    # 其他章节按同样方式扩展
 ├── systems/             # 系统工程
 │   ├── index.md
 │   └── roadmap.md
@@ -173,8 +182,13 @@ examples/                # 可由 CI 执行的完整示例
 | `D3Tree` | D3 | 自定义树、图和数据驱动 SVG |
 | `CodeEditor` | CodeMirror 6 | 可编辑代码与语法高亮 |
 | `PythonPlayground` | CodeMirror 6 + Pyodide | 浏览器内运行轻量 Python |
-| `AlgorithmCanvas` | Konva + Vue Konva | 算法步骤和高频二维动画 |
+| `AlgorithmCanvas` | Konva + Vue Konva | 需要场景节点与命中检测的二维动画 |
 | `MotionSequence` | Motion for Vue | 状态变化、步骤和轻量交互动画 |
+| `MatrixMultiplicationDemo` | Vue | 行列乘加的逐项教学演示 |
+| `AttentionShapeDemo` | Motion for Vue | 投影、拆头、转置的 shape 演示 |
+| `AttentionPipelineDemo` | Vue | QKᵀ、缩放、mask、softmax、加权读取 |
+| `QkvRetrievalDemo` | 原生 Canvas | 固定矩阵位置的 QKV 投影与注意力读取 |
+| `KnowledgeQuiz` | Vue + localStorage | 判断、单选、填空、开放题与本地复习进度 |
 | `FlowDiagram` | Vue Flow | Agent Harness、协议和分布式工作流 |
 | `WaveformDiagram` | WaveDrom | 数字逻辑与嵌入式通信时序 |
 | `ThreeScene` | Three.js + TresJS | 三维结构、机器人和空间算法 |
@@ -187,7 +201,8 @@ Markdown 数学公式使用 VitePress 的 MathJax 支持。组件实例和效果
 - 汇总演示页使用 `LazyDemo` 在组件接近视口时自动异步装载，不能改回同页首屏同时挂载所有重量级引擎。
 - 在 Markdown 中使用浏览器交互组件时包裹 `<ClientOnly>`。
 - 公式和静态关系优先用 MathJax 或 Mermaid，普通统计图优先用 ECharts。
-- D3 用于需要自定义数据绑定的 SVG；Konva 用于高频 Canvas 绘制。
+- D3 用于需要自定义数据绑定的 SVG；固定矩阵流水线优先使用原生 Canvas，需要命中检测或复杂场景树时使用 Konva。
+- 模型层、矩阵和张量动画必须遵循知识文档体系规范中的“模型计算与矩阵动画”契约；代码分层与复用规则见交互组件指南。
 - Agent 和系统状态图优先用 Vue Flow，硬件数字时序优先用 WaveDrom。
 - Three.js 只用于空间关系确实影响理解的内容。
 - 动画必须尊重 `prefers-reduced-motion`，并提供文字解释或静态回退，不能成为唯一信息来源。
@@ -223,6 +238,7 @@ npm run docs:dev
 
 ```bash
 npm run check:python
+npm run check:content
 npm run docs:build
 npm run docs:preview
 ```

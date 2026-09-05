@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, onBeforeUnmount, ref } from "vue";
 import { motion, useReducedMotion } from "motion-v";
 
 type Axis = {
@@ -76,11 +76,51 @@ const steps: Step[] = [
       { symbol: "Tk", value: T, label: "key token", tone: "teal" },
     ],
   },
+  {
+    title: "读取：权重对 Value 加权求和",
+    reason: "[Tq,Tk] @ [Tk,D] 消去 key 轴，为每个 query 保留一个 D 维读取结果。",
+    expression: "weights @ V  [B,H,Tq,Tk] @ [B,H,Tk,D] → [B,H,Tq,D]",
+    axes: [
+      { symbol: "B", value: B, label: "样本", tone: "blue" },
+      { symbol: "H", value: H, label: "注意力头", tone: "orange" },
+      { symbol: "Tq", value: T, label: "query token", tone: "green" },
+      { symbol: "D", value: D, label: "每头输出", tone: "violet" },
+    ],
+  },
+  {
+    title: "换轴：让 token 再次位于 head 前面",
+    reason: "转置只恢复轴顺序，不改变各头已经算出的输出数值。",
+    expression: "transpose  [B,H,T,D] → [B,T,H,D]",
+    axes: [
+      { symbol: "B", value: B, label: "样本", tone: "blue" },
+      { symbol: "T", value: T, label: "query token", tone: "green" },
+      { symbol: "H", value: H, label: "注意力头", tone: "orange" },
+      { symbol: "D", value: D, label: "每头输出", tone: "violet" },
+    ],
+  },
+  {
+    title: "合并：拼接多个头并做输出投影",
+    reason: "reshape 合并 H、D 为 C；随后 Wo 再次混合各头特征，输出恢复为 residual 可相加的 [B,T,C]。",
+    expression: "reshape + Wo  [B,T,H,D] → [B,T,C] @ [C,C] → [B,T,C]",
+    axes: [
+      { symbol: "B", value: B, label: "样本", tone: "blue" },
+      { symbol: "T", value: T, label: "query token", tone: "green" },
+      { symbol: "C", value: C, label: "合并特征", tone: "violet" },
+    ],
+  },
 ];
 
 const current = ref(0);
+const playing = ref(false);
+let timer: ReturnType<typeof setInterval> | undefined;
 const reducedMotion = useReducedMotion();
 const step = computed(() => steps[current.value]);
+
+function stop() {
+  playing.value = false;
+  if (timer) clearInterval(timer);
+  timer = undefined;
+}
 
 function previous() {
   current.value = Math.max(0, current.value - 1);
@@ -89,6 +129,23 @@ function previous() {
 function next() {
   current.value = Math.min(steps.length - 1, current.value + 1);
 }
+
+function play() {
+  if (playing.value) return stop();
+  if (current.value === steps.length - 1) current.value = 0;
+  playing.value = true;
+  timer = setInterval(() => {
+    if (current.value === steps.length - 1) return stop();
+    current.value += 1;
+  }, 1500);
+}
+
+function reset() {
+  stop();
+  current.value = 0;
+}
+
+onBeforeUnmount(stop);
 </script>
 
 <template>
@@ -136,8 +193,11 @@ function next() {
     <div class="interactive-controls">
       <button type="button" class="secondary" :disabled="current === 0" @click="previous">上一步</button>
       <button type="button" :disabled="current === steps.length - 1" @click="next">下一步</button>
+      <button type="button" class="secondary" @click="play">{{ playing ? '暂停' : '播放' }}</button>
+      <button type="button" class="secondary" @click="reset">重置</button>
       <span>步骤 {{ current + 1 }} / {{ steps.length }}</span>
     </div>
+    <p class="attention-shape-demo__fallback interactive-fallback">静态路径：`[B,T,C] → [B,H,T,D] → scores [B,H,T,T] → heads [B,H,T,D] → [B,T,C]`。</p>
   </figure>
 </template>
 
@@ -148,7 +208,7 @@ function next() {
 
 .attention-shape-demo__progress {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(8, 1fr);
   gap: 8px;
   margin: 0 0 20px;
   padding: 0;
@@ -273,7 +333,22 @@ function next() {
   opacity: 0.45;
 }
 
+.attention-shape-demo__fallback {
+  margin: 0;
+  padding: 0 16px 16px;
+  color: var(--vp-c-text-2);
+  font-size: 14px;
+}
+
 @media (max-width: 640px) {
+  .attention-shape-demo__progress {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .attention-shape-demo__progress li:nth-child(4n)::after {
+    display: none;
+  }
+
   .attention-shape-demo__axes {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));

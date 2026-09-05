@@ -17,13 +17,14 @@ const props = withDefaults(
 );
 
 const source = ref(props.code);
-const output = ref("点击“运行”后，输出会显示在这里。");
+const output = ref("");
+const collapsed = ref(false);
 const state = ref<"idle" | "loading" | "ready" | "running" | "done" | "error">("idle");
 let preparationPromise: Promise<any> | undefined;
 
 const buttonText = computed(() => {
-  if (state.value === "loading") return "正在加载 Python 与依赖…";
-  if (state.value === "running") return "正在运行…";
+  if (state.value === "loading") return "加载中";
+  if (state.value === "running") return "运行中";
   return "运行";
 });
 
@@ -50,7 +51,7 @@ async function run() {
       lines.push(String(result));
     }
     if (result && typeof result.destroy === "function") result.destroy();
-    output.value = lines.join("\n") || "运行完成，没有输出。";
+    output.value = lines.join("\n");
     state.value = "done";
   } catch (error) {
     output.value = error instanceof Error ? error.message : String(error);
@@ -69,16 +70,41 @@ onMounted(() => {
 <template>
   <section class="python-playground">
     <header class="python-playground__header">
-      <div>
+      <div class="python-playground__title">
+        <span class="python-playground__language">PY</span>
         <strong>{{ title }}</strong>
-        <span>在你的浏览器中运行</span>
       </div>
-      <button type="button" :disabled="state === 'loading' || state === 'running'" @click="run">
-        {{ buttonText }}
-      </button>
+      <div class="python-playground__actions">
+        <button
+          class="python-playground__action python-playground__run"
+          type="button"
+          :disabled="state === 'loading' || state === 'running'"
+          :aria-busy="state === 'loading' || state === 'running'"
+          :aria-label="buttonText"
+          :title="buttonText"
+          @click="run"
+        >
+          <svg aria-hidden="true" viewBox="0 0 20 20">
+            <path d="M6.5 4.75 15 10l-8.5 5.25z" />
+          </svg>
+        </button>
+        <button
+          class="python-playground__action python-playground__toggle"
+          type="button"
+          :aria-expanded="!collapsed"
+          :aria-label="collapsed ? '展开代码' : '收起代码'"
+          :title="collapsed ? '展开代码' : '收起代码'"
+          @click="collapsed = !collapsed"
+        >
+          <svg :class="{ 'is-collapsed': collapsed }" aria-hidden="true" viewBox="0 0 20 20">
+            <path d="m5 7.5 5 5 5-5" />
+          </svg>
+        </button>
+      </div>
     </header>
-    <CodeEditor v-model="source" language="python" label="Python 源代码" />
-    <pre :class="{ 'is-error': state === 'error' }" aria-live="polite">{{ output }}</pre>
-    <p>Pyodide 和默认机器学习依赖会异步下载到浏览器；不要在代码中填写密码或令牌。</p>
+    <div v-show="!collapsed" class="python-playground__body">
+      <CodeEditor v-model="source" language="python" label="Python 源代码" />
+      <pre v-if="output" :class="{ 'is-error': state === 'error' }" aria-live="polite">{{ output }}</pre>
+    </div>
   </section>
 </template>

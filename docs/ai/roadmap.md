@@ -1,162 +1,103 @@
 ---
 title: 智能算法知识地图
+date: 2026-09-04
+updated: 2026-09-05
 article: false
-description: 智能算法专题的完整知识结构、章节边界、依赖关系与建设规则。
+type: overview
+status: verified
+track: ai
+description: 智能算法专栏的依赖关系、学习顺序、内容边界和建设成熟度。
 ---
 
 # 智能算法知识地图
 
-## 组织原则
+知识地图负责回答“在哪里、依赖什么、下一步是什么”，不承担具体教学。章节编号表示主依赖，不表示所有主题只能线性学习。
 
-知识库同时采用两条轴：
-
-- **原理轴**：表示 → 学习 → 模型 → 生成与决策；
-- **生命周期轴**：问题 → 数据 → 训练 → 评测 → 推理 → 反馈。
-
-原理轴回答“为什么这样计算”，生命周期轴回答“怎样把计算变成可信系统”。任何具体框架或项目都只是这两条轴上的案例。
-
-::: tip 文章粒度
-一篇文章对应一个完整知识块，内部再分概念、公式、可视化、实现、实验和边界。只有当某个小节已经大到无法独立阅读或需要独立维护的实验时，才拆成新文章。
-:::
-
-## 完整依赖图
+## 主依赖
 
 <ClientOnly>
   <MermaidDiagram
-    title="章节依赖与反馈"
-    :code="`flowchart TD\n      F[0 数学、张量与优化基础]\n      M[1 学习问题与经典机器学习]\n      D[2 神经网络与表示学习]\n      T[3 序列、注意力与 Transformer]\n      G[4 基础模型与生成模型]\n      R[5 数据、训练与对齐]\n      E[6 推理、评测与安全]\n      A[7 检索、Agent 与智能系统]\n      P[MiniMind 与其他项目实战]\n      F --> M --> D --> T --> G\n      F --> D\n      M --> R\n      D --> R\n      T --> R\n      G --> R --> E --> A\n      P -.实现验证.-> D\n      P -.训练验证.-> R\n      P -.误差反馈.-> E\n      E -.反馈到问题与数据.-> M`"
+    title="智能算法的学习依赖"
+    :code="`flowchart LR\n A[0 模型计算基础] --> B[1 机器学习与泛化评估]\n A --> C[2 神经网络]\n B --> C\n C --> D[3 Transformer]\n D --> E[4 基础模型]\n E --> F[5 数据与训练]\n F --> G[6 推理与评测]\n G --> H[7 RAG 与 Agent]\n L[实验与案例] -.持续验证.-> B\n L -.持续验证.-> D\n L -.持续验证.-> G`"
   />
 </ClientOnly>
 
-## 第 0 章：数学、张量与优化基础
+## 当前可执行主线
 
-目标不是完整重学高等数学，而是能解释模型中的对象、变换和学习信号。
+1. [矩阵乘法](/ai/foundations/matrix-multiplication)：理解一行和一列如何生成一个标量。
+2. [张量的轴与形状](/ai/foundations/tensor-shapes)：把矩阵规则推广到 batch、token、head。
+3. [最小训练循环](/ai/foundations/optimization-loop)：连接损失、梯度和参数更新。
+4. [模型是真的学会，还是偷看了答案？](/ai/machine-learning/problem-and-evaluation)：先学会识别记忆、泄漏和虚假高分。
+5. [机器学习基线实验](/ai/machine-learning/baseline-lab)：用简单模型暴露数据和指标问题。
+6. [MLP 如何学习表示](/ai/deep-learning/mlp-representation)：从线性层进入非线性组合。
+7. [反向传播](/ai/deep-learning/backpropagation)：沿计算图追踪梯度。
+8. [QKV 是一次可学习检索](/ai/transformers/qkv-retrieval)：理解 attention 的语义。
+9. [完整注意力流水线](/ai/transformers/attention-pipeline)：连接缩放、mask、softmax 和加权读取。
+10. [单头因果注意力实验](/ai/transformers/attention-lab)：运行同一组数值并用断言验证完整闭环。
+11. [多头注意力的形状](/ai/transformers/multi-head-shapes)：在单头闭环之上增加 batch、head、拆分与合并。
+12. [Decoder Block](/ai/transformers/decoder-block)：把注意力、残差、归一化和逐 token FFN 放回完整结构。
+13. [文本与 next-token 样本](/ai/foundation-models/tokenization-and-samples)：连接 tokenizer、Embedding、输入与标签。
+14. [批次与因果遮罩](/ai/foundation-models/data-batches-and-causal-mask)：从 token 流构造 `[B,T]` 并阻止未来泄漏。
+15. [完整语言模型结构](/ai/foundation-models/language-model-architecture)：组装 Embedding、Decoder Blocks、Norm 与词表头。
+16. [Next-token 前向计算](/ai/foundation-models/next-token-prediction)：从隐藏表示推导词表 logits、概率和 loss。
+17. [语言模型训练循环](/ai/foundation-models/training-loop)：把 batch loss、反向传播与 optimizer step 闭环。
+18. [参数、显存与计算量](/ai/foundation-models/parameters-memory-compute)：估算模型权重、训练状态、激活和 KV Cache。
+19. [训练与生成](/ai/foundation-models/training-vs-generation)：区分并行训练和逐 token 生成。
+20. [Prefill 与 KV Cache](/ai/foundation-models/prefill-kv-cache)：理解增量推理怎样复用历史 K/V。
+21. [采样策略](/ai/foundation-models/sampling)：操作 temperature、top-k 和 top-p。
+22. [最小语言模型实验](/ai/foundation-models/language-model-lab)：训练可更新 logits 并复现生成。
+23. [模型架构家族](/ai/foundation-models/model-families)：区分 Encoder-only、Encoder–Decoder 与 Decoder-only。
+24. [Scaling 与 MoE](/ai/foundation-models/scaling-and-moe)：区分参数、数据、计算与稀疏专家。
+25. [多模态与扩散](/ai/foundation-models/multimodal-and-diffusion)：连接视觉语言理解与去噪生成。
+26. [能力来源与边界](/ai/foundation-models/capability-boundaries)：区分参数、上下文、检索和工具结果。
+27. [数据谱系与切分](/ai/data-training-alignment/data-lineage-and-splits)：记录来源、版本、去重簇与无泄漏 split。
+28. [预训练证据](/ai/data-training-alignment/pretraining-evidence)：从单 batch 过拟合推进到可恢复基线。
+29. [SFT 与 Chat Template](/ai/data-training-alignment/sft-and-chat-template)：连接结构化消息、token 和 loss mask。
+30. [LoRA 适配](/ai/data-training-alignment/lora-adaptation)：区分冻结基座与低秩可训练增量。
+31. [偏好数据与 DPO](/ai/data-training-alignment/preference-alignment)：理解 chosen/rejected、参考策略和回归。
+32. [训练审计实验](/ai/data-training-alignment/training-evidence-lab)：用断言检查重复、SFT mask 和偏好对。
+33. [推理服务请求](/ai/inference-evaluation-safety/inference-serving)：区分 API、调度、runtime、cache 与输出。
+34. [性能指标](/ai/inference-evaluation-safety/performance-metrics)：测量 TTFT、TPOT、吞吐、显存和成本。
+35. [可信评测设计](/ai/inference-evaluation-safety/evaluation-design)：从用户任务建立数据、rubric、指标和基线。
+36. [错误分类与归因](/ai/inference-evaluation-safety/error-analysis)：用 oracle 对照定位模型、检索、工具和评分错误。
+37. [模型外安全控制](/ai/inference-evaluation-safety/safety-controls)：落实权限、schema、审批、隔离与审计。
+38. [评测与安全实验](/ai/inference-evaluation-safety/evaluation-safety-lab)：保留逐样本证据并注入高风险动作。
+39. [RAG 证据链](/ai/agents-and-systems/rag-pipeline)：从文档解析到引用建立可追踪路径。
+40. [检索与回答评测](/ai/agents-and-systems/retrieval-evaluation)：分开测 corpus、retrieval、context 和 answer。
+41. [工具调用协议](/ai/agents-and-systems/tool-protocol)：定义 schema、权限、错误、副作用与幂等。
+42. [Agent 状态机](/ai/agents-and-systems/agent-state-machine)：闭合成功、失败、等待、取消和恢复路径。
+43. [上下文与记忆](/ai/agents-and-systems/memory-and-context)：区分本轮 token、任务状态和长期事实。
+44. [可靠性与多 Agent](/ai/agents-and-systems/reliability-and-multi-agent)：控制重试、审批、预算和合并责任。
+45. [Agent 状态机实验](/ai/agents-and-systems/agent-loop-lab)：运行成功、超时与写入审批路径。
 
-- **表示与形状**：标量、向量、矩阵、张量、轴语义、索引、广播、reshape、transpose；
-- **线性代数**：向量空间、基、线性映射、内积、矩阵乘法、范数、特征值与 SVD 的直觉；
-- **微积分**：导数、偏导、梯度、链式法则、Jacobian 与反向传播；
-- **概率与信息**：随机变量、条件概率、期望、方差、最大似然、熵、交叉熵和 KL 散度；
-- **数值计算**：浮点数、稳定 softmax、精度、随机性、复杂度、内存与向量化；
-- **优化**：梯度下降、动量、Adam/AdamW、学习率、正则化和约束；
-- **PyTorch 计算模型**：tensor、autograd、module、optimizer、device 与计算图。
+## 章节边界
 
-过关标准：看到一个张量表达式能说明每个轴、推导输出、估算计算量，并解释梯度怎样回到参数。
-
-## 第 1 章：学习问题与经典机器学习
-
-- 问题定义、样本、特征、标签、目标函数、假设空间和归纳偏置；
-- 监督、无监督、自监督、半监督与强化学习的区别；
-- 线性/逻辑回归、朴素贝叶斯、kNN、决策树、随机森林、Boosting、SVM；
-- 聚类、降维、密度估计、异常检测与时间序列基础；
-- 训练/验证/测试、交叉验证、数据泄漏、偏差—方差和校准；
-- 分类、回归、排序与概率预测的指标选择；
-- 可解释性、因果问题与相关性边界。
-
-过关标准：能把真实问题写成可验证的学习任务，并建立一个难以被复杂模型轻易糊弄的基线。
-
-## 第 2 章：神经网络与表示学习
-
-- 感知机、MLP、激活函数、损失和反向传播；
-- 初始化、归一化、残差、正则化和优化稳定性；
-- CNN：局部连接、共享权重、感受野和视觉层级；
-- RNN/LSTM/GRU：状态、时间展开、长程依赖与梯度问题；
-- Embedding、自编码器、对比学习与迁移学习；
-- 图神经网络、视觉、语音和多模态的共同表示问题；
-- 参数、激活、FLOPs、显存和硬件执行的基本关系。
-
-过关标准：能手写并训练小网络，解释每个模块的归纳偏置，而不只会组合框架层。
-
-## 第 3 章：序列、注意力与 Transformer
-
-- 序列建模问题与 RNN 的串行瓶颈；
-- query、key、value 的信息检索解释；
-- scaled dot-product attention、mask 与 softmax；
-- 多头注意力为什么需要不同投影，为什么拆头和转置；
-- MHA、MQA、GQA 的能力与 KV Cache 代价；
-- 位置编码、RoPE、ALiBi 与长上下文；
-- FFN/SwiGLU、RMSNorm、残差与 Decoder Block；
-- Encoder-only、Decoder-only、Encoder–Decoder 的任务差异；
-- 参数量、注意力复杂度、FlashAttention 与稀疏/线性注意力。
-
-过关标准：能从 `[B,T,C]` 推导一次完整前向传播，并解释每次变形服务于哪次计算。
-
-## 第 4 章：基础模型与生成模型
-
-- Tokenization、词表、Embedding 与语言建模目标；
-- BERT/GPT/T5 等预训练范式及其适用任务；
-- scaling law、涌现的观察边界与数据/算力/参数权衡；
-- Dense、MoE、模型容量与路由；
-- 自回归生成、扩散模型、VAE/GAN 的目标差异；
-- 视觉 Transformer、CLIP、视觉语言模型和多模态对齐；
-- 上下文学习、提示、推理行为与能力归因边界。
-
-过关标准：能从训练目标解释模型擅长和不擅长什么，不把语言流畅等同于事实、推理或可靠性。
-
-## 第 5 章：数据、训练与对齐
-
-- 数据采集、许可、清洗、去重、过滤、配比、版本与污染；
-- BPE/WordPiece/Unigram、ByteLevel、特殊 token 与 chat template；
-- 预训练数据管线、packing、mask、batch 和 checkpoint；
-- SFT、continued pretraining、LoRA/Adapter 等 PEFT；
-- 蒸馏、量化感知训练与模型压缩；
-- 偏好数据、reward model、DPO 与 RLHF；
-- PPO、GRPO/CISPO 等策略优化的前置假设和失败方式；
-- 单卡、多卡、混合精度、梯度累积、并行与实验追踪。
-
-过关标准：能把模型行为追溯到数据与目标函数，并用最小对照实验验证训练改动。
-
-## 第 6 章：推理、评测与安全
-
-- greedy、temperature、top-k/top-p、beam search 和停止条件；
-- KV Cache、continuous batching、量化、编译和推理引擎；
-- 延迟、吞吐、显存、成本、容量规划与降级；
-- 离线/在线评测、基准集、污染、统计不确定性与人工评审；
-- 任务成功率、事实性、校准、鲁棒性和长尾误差；
-- 提示注入、越权工具调用、隐私、数据泄漏和模型滥用；
-- tracing、监控、漂移、回归集、红队和事件响应。
-
-过关标准：任何“变好”都能指出基线、数据范围、指标、置信边界以及没有被证明的部分。
-
-## 第 7 章：检索、Agent 与智能系统
-
-- Prompt、结构化输出、function/tool calling 和协议边界；
-- Embedding 检索、切块、召回、重排、引用和 RAG 评测；
-- 短期上下文、长期记忆、状态、存储与遗忘策略；
-- Agent loop、状态机、工作流、规划与反思；
-- 权限、沙箱、人工审批、幂等、重试、超时和失败恢复；
-- 多 Agent 的通信、任务分解、共享状态和成本；
-- Evals、trace、可观测性、调度与持续改进；
-- 产品边界：何时用确定性软件、模型调用、RAG 或 Agent。
-
-过关标准：能把模型的不确定输出包进显式控制和证据链，而不是依赖一句更长的 prompt。
-
-## 实战层
-
-实战不决定目录，只负责验证目录中的知识：
-
-- **MiniMind**：观察小型 Decoder LLM 的 tokenizer、模型、预训练、SFT、LoRA、DPO、RL、推理和服务；
-- **从零最小实现**：先自己实现，再对照成熟项目，避免被封装掩盖原理；
-- **框架实践**：用 PyTorch、Transformers、Datasets、PEFT 等验证生态接口；
-- **系统实践**：用固定评测集、日志、服务和监控验证完整闭环。
-
-## 开放资料如何使用
-
-| 资料 | 在本知识库中的角色 | 不直接照搬的部分 |
+| 章 | 核心问题 | 不在本章解决 |
 | --- | --- | --- |
-| [Dive into Deep Learning](https://github.com/d2l-ai/d2l-en) | 数学、经典网络、注意力、优化和计算性能的主参考 | 它的书籍章节粒度不等于本站文章粒度 |
-| [Stanford CS229](https://cs229.stanford.edu/) | 经典机器学习、学习理论与问题定义 | 不以课程周次组织本站 |
-| [Stanford CS336](https://cs336.stanford.edu/spring2025/) | 从 tokenizer、Transformer 到数据、训练、扩展和对齐的实现闭环 | GPU/分布式作业按资源条件选做 |
-| [Hugging Face Course](https://github.com/huggingface/course) | Tokenizer、Datasets、Transformers 和微调工具链 | 先理解原理，再使用高层 API |
-| [Full Stack Deep Learning](https://fullstackdeeplearning.com/course/2022/) | 数据管理、实验、测试、部署和监控 | 通用系统能力链接到系统工程专栏 |
-| [Hugging Face Agents Course](https://huggingface.co/learn/agents-course/) | 工具、Agentic RAG、可观测性和评测案例 | 框架只是实现选择，不作为概念定义 |
-| [MiniMind](https://github.com/jingyaogong/minimind) | 小模型全链路实战与源码对照 | 项目文件树不作为知识树 |
+| 0 | 数字如何表示对象、参与计算并被优化 | 特定网络为何适合特定任务 |
+| 1 | 什么证据说明模型在未知数据上有效 | 深层网络内部怎样学习表示 |
+| 2 | 多层可微变换怎样形成表示 | token 间全局通信的具体机制 |
+| 3 | 序列位置怎样选择并汇总其他位置 | 大规模数据治理与产品可靠性 |
+| 4 | 预训练目标怎样形成可复用生成能力 | 训练流水线的具体治理 |
+| 5 | 数据、目标和系统怎样塑造模型行为 | 线上系统的全部安全控制 |
+| 6 | 怎样运行、测量并限制系统 | 具体 Agent 编排框架 |
+| 7 | 怎样组合模型、检索、工具和状态 | 把框架 API 当成模型能力 |
 
-## 建设顺序
+## 建设看板
 
-1. 先补齐第 0、2、3 章，使每个公式都有变量语义、shape 推导和最小实验；
-2. 同步建立第 1、6 章的基线与评测习惯；
-3. 再进入第 4、5 章和 MiniMind 全链路实践；
-4. 模型与评测稳定后学习第 7 章，不提前用 Agent 框架遮蔽基础问题；
-5. 视觉、多模态、强化学习、推荐和时间序列作为各章的纵向专题逐步展开。
+| 状态 | 页面范围 | 含义 |
+| --- | --- | --- |
+| `verified` | 本地图、规范页 | 结构和链接已校验 |
+| `learnable` | 第 0–7 章核心单元 | 有目标、例子、验证、自测和下一步 |
+| `draft` | MiniMind 案例与后续专题 | 可导航且边界明确，仍缺完整学习闭环 |
 
-新内容必须说明自己位于哪个知识块、依赖什么、验证了什么，以及不能据此声称什么。
+下一轮优先把第 0–7 章知识应用到 MiniMind 案例，并补充强化学习、推荐与时间序列专题；专题不得破坏当前唯一主路径。
+
+## 资料的角色
+
+- [Dive into Deep Learning](https://github.com/d2l-ai/d2l-en)：数学、网络、优化与 attention 的教材参照。
+- [Hugging Face Course](https://github.com/huggingface/course)：tokenizer、模型与生态实践参照。
+- [Microsoft ML for Beginners](https://github.com/microsoft/ML-For-Beginners)：以课程目标、练习和测验构成闭环的参照。
+- [MiniMind](https://github.com/jingyaogong/minimind)：小型 Decoder LLM 的工程案例，不作为本站目录模板。
+
+引用开放资料时必须区分：来源事实、本站推导、实验观察和个人判断。

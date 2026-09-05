@@ -1,146 +1,159 @@
 ---
-title: 序列、注意力与 Transformer
+title: 3. 序列、注意力与 Transformer
 date: 2026-09-04
-categories:
-  - 智能算法
-tags:
-  - Attention
-  - Transformer
-  - RoPE
-description: 从信息检索问题推导注意力，解释多头、拆轴、转置、位置编码与 Transformer Block。
+updated: 2026-09-05
+type: overview
+status: learnable
+track: ai
+categories: [智能算法]
+tags: [Attention, Transformer, Sequence]
+description: 从两个 token 的软检索开始，逐步建立 QKV、缩放点积注意力、多头 shape 和 Transformer Block 的完整心智模型。
 ---
 
-# 序列、注意力与 Transformer
+# 3. 序列、注意力与 Transformer
 
-本章不从背诵 `Q、K、V` 开始，而从问题开始：序列中每个位置怎样根据当前需要，从其他位置选择和汇总信息？
+本章只围绕一个核心问题展开：**序列中的每个位置，怎样根据当前需要，从允许访问的其他位置读取信息？**
 
-## 1. 为什么从 RNN 走向注意力
+Transformer 的回答不是“把所有 token 平均一下”，而是为每个当前位置生成 Query，与所有候选 Key 计算匹配程度，再按权重汇总对应的 Value。训练会调整这些投影，使检索方式对任务有用。
 
-RNN 把历史压进一个不断更新的状态，顺序明确但必须逐步计算；很远的信息要经过许多状态传递。注意力让一个位置直接读取所有允许访问的位置，路径更短，也能并行计算整个训练序列。
+本章使用一个贯穿主线的教学序列“红色 苹果”：第一行表示“红色”，第二行表示“苹果”。目标不是训练语言模型，而是观察第二个位置怎样在保留自身信息的同时读取第一个位置携带的颜色信息。
 
-代价是普通 self-attention 要显式处理 token 两两关系，分数矩阵随序列长度 $T$ 近似按 $T^2$ 增长。
+## 本章在整条学习链中的位置
 
-## 2. Q、K、V 是一次可学习检索
+上一章的 MLP 对每个输入独立变换，却没有解决 token 之间怎样通信。本章先解释文本怎样成为矩阵中的行，再建立单头通信闭环，最后扩展到多头和完整 Block：
 
-对输入 $X$ 做三个不同线性投影：
+```text
+文本 → token id → embedding，并让位置机制参与表示 → token 表示 X
+→ Q/K/V 投影
+→ token 两两打分
+→ scale + mask + softmax
+→ 加权汇总 V
+→ 单头代码与反事实验证
+→ 多头合并与输出投影
+→ residual + normalization
+→ 逐 token FFN
+→ 下一层表示
+```
+
+attention 负责**跨位置通信**；FFN 负责**每个位置内部的非线性变换**。residual 和 normalization 让深层堆叠更可训练，位置编码让顺序进入计算。
+
+## 前置知识
+
+开始前应能完成：
+
+- 用“一行乘一列”解释[矩阵乘法](/ai/foundations/matrix-multiplication)；
+- 区分 shape 中各轴，并理解 reshape 与 transpose 的差异；
+- 说明[MLP](/ai/deep-learning/mlp-representation)的线性投影和隐藏表示；
+- 知道 softmax 把一组分数归一化为和为 1 的非负权重。
+
+若这些概念仍模糊，注意力公式很容易退化为符号记忆。
+
+## 文本怎样成为矩阵 X
+
+教学中把入口压缩为：
+
+```text
+“红色 苹果”
+→ 两个教学 token
+→ 各自的 token id
+→ 查 embedding 表，并让位置机制参与表示
+→ X ∈ ℝ²ˣ²
+```
+
+因此 `X` 的每一行对应一个 token 位置，每一列对应一个特征。真实 tokenizer 可能把文本切成不同片段，真实 embedding 也远不止二维；这里的 `X=I` 是人为构造的可手算坐标，不是声称模型会自然生成单位矩阵。Tokenizer 训练和具体位置编码实现不在本章展开。
+
+## 全章统一的最小例子
+
+核心课程统一使用单个样本、两个 token、每头维度 `D=2`：
 
 $$
-Q=XW_Q, \qquad K=XW_K, \qquad V=XW_V
+Q=K=\begin{bmatrix}1&0\\0&1\end{bmatrix},
+\qquad
+V=\begin{bmatrix}2&0\\0&4\end{bmatrix}
 $$
 
-- Query：当前位置正在寻找什么；
-- Key：每个位置可以用什么特征被匹配；
-- Value：匹配后实际取回什么信息。
+这组数字满足：
 
-相似度、归一化和加权汇总为：
+- 两个 Q/K 向量互相正交，点积为 0；
+- 每个位置与自身的点积为 1；
+- 两个 Value 明显不同，便于观察“匹配权重”和“取回内容”的区别；
+- 加上 causal mask 后，第一个 token 只能读取自己，第二个 token 可以读取两个位置。
 
-$$
-\operatorname{Attention}(Q,K,V)
-=\operatorname{softmax}\left(\frac{QK^\top}{\sqrt{D}}+M\right)V
-$$
+上述两行分别沿用“红色”和“苹果”两个教学位置。多头 shape 课程在单头闭环完成之后，再单独使用 `B=2,T=4,C=8,H=2,D=4` 研究轴变化，不与数值推导混在一起。
 
-缩放因子 $\sqrt D$ 防止维度增加时点积幅度过大，使 softmax 过早饱和；mask $M$ 决定哪些关系被允许。
+## 阅读过程中会依次得到的对象
 
-## 3. 为什么需要多个头
+这张表只用于定位名称，不要求在第一遍进入课程前背诵。对象会在 QKV、完整流水线和 Block 课程中按计算顺序出现。
 
-单头只有一组 $W_Q,W_K,W_V$，所有关系被压在同一个相似度空间里。多头注意力让不同投影学习不同的匹配方式：一个头可能更关注局部搭配，另一个头可能更关注远距离指代或结构位置。
+| 对象 | 回答的问题 | 是否由训练直接更新 |
+| --- | --- | --- |
+| 输入 `X` | 每个 token 当前表示是什么 | 否，由上一层或 embedding 产生 |
+| `WQ/WK/WV` | 怎样生成检索角色 | 是 |
+| Query `Q` | 当前 token 想找什么 | 否，是激活 |
+| Key `K` | 候选 token 怎样接受匹配 | 否，是激活 |
+| Value `V` | 候选被选中后提供什么 | 否，是激活 |
+| scores | 每个 query 与每个 key 多匹配 | 否，是中间值 |
+| weights | 每个 query 向合法 key 分配多少读取比例 | 否，是 softmax 结果 |
+| output `O` | 每个 query 最终取回了什么 | 否，是新的 token 表示 |
 
-这不是把同一份最终注意力矩阵机械切几块。完整投影矩阵的不同列对应不同头的子空间，训练会让它们形成不同参数；拆头只是把已经投影出的 `H×D` 个特征重新组织为 `H` 组。
+Q、K、V 和注意力权重都是当前输入经过当前参数产生的激活，不是模型永久保存的知识表。真正由优化器更新的是投影权重等参数。
 
-多头提供的是并行的关系子空间，不保证每个头都会自动获得清晰、唯一、可人工命名的功能。
+## 推荐学习顺序
 
-## 4. 为什么先拆头，再转置
+| 顺序 | 类型 | 页面 | 预计 | 完成证据 |
+| ---: | --- | --- | ---: | --- |
+| 1 | lesson | [QKV 是一次可学习检索](/ai/transformers/qkv-retrieval) | 35 分钟 | 能从 X 产生 Q/K/V，并区分匹配依据与取回内容 |
+| 2 | lesson | [完整注意力流水线](/ai/transformers/attention-pipeline) | 50 分钟 | 用同一组输入手算 scale、mask、softmax 与 weighted V |
+| 3 | lab | [从零实现单头因果注意力](/ai/transformers/attention-lab) | 50 分钟 | 运行实现并通过 shape、mask、归一化断言 |
+| 4 | lesson | [多头注意力的 shape](/ai/transformers/multi-head-shapes) | 45 分钟 | 从 `[B,T,C]` 推导到 `[B,H,T,T]` 再返回 |
+| 5 | lesson | [一个 Decoder Block 如何更新 token 表示](/ai/transformers/decoder-block) | 45 分钟 | 能区分跨 token attention 与逐 token FFN |
+| 6 | reference | [注意力符号与 shape 速查](/ai/transformers/reference) | 查询用 | 能快速确认轴语义、广播和复杂度 |
+| 7 | review | [第 3 章复习与验收](/ai/transformers/review) | 35 分钟 | 完整推导并诊断一次未来信息泄漏 |
 
-假设输入为 `[B,T,C]`，且 `C=H×D`。
+学习时先完成前三步，确认自己能解释单头中的每一个轴和数字，再增加 head 轴。MQA、GQA、KV Cache 属于查询和工程扩展，不进入本章零基础过关主线。
 
-### 第一步：投影
+## Attention 放回 Transformer Block
 
-```text
-X [B,T,C] @ Wq [C,H×D] → Q [B,T,H×D]
-```
-
-投影完成了真正的特征混合，并为不同头产生不同子空间。
-
-### 第二步：拆头
-
-```text
-[B,T,H×D] reshape → [B,T,H,D]
-```
-
-reshape 没有计算新数值，只把最后一个轴解释为“头 × 每头特征”。
-
-### 第三步：转置
-
-```text
-[B,T,H,D] transpose → [B,H,T,D]
-```
-
-PyTorch 的批量矩阵乘法把最后两个轴当作矩阵、前面的轴当作批次。我们需要针对每个 `B,H` 独立执行：
-
-```text
-Q [T,D] @ Kᵀ [D,T] → scores [T,T]
-```
-
-因此把 `B,H` 放在前面，`T,D` 放在最后。转置不是注意力理论额外要求的神秘步骤，而是把语义轴排列成矩阵乘法接口需要的布局。
-
-<ClientOnly>
-  <AttentionShapeDemo />
-</ClientOnly>
-
-## 5. `[T,T]` 到底表示什么
-
-在分数矩阵中，行轴是 query token，列轴是 key token：
-
-```text
-scores[b, h, i, j]
-```
-
-表示第 `b` 条样本、第 `h` 个头中，第 `i` 个 token 对第 `j` 个 token 的未归一化关注分数。softmax 通常沿最后的 key 轴进行，因此每个 query 的一行权重和为 1。
-
-## 6. causal mask 为什么不可缺少
-
-自回归模型训练时一次输入整个序列，但位置 $t$ 只能预测下一个 token，不能看到未来答案。causal mask 把 `j > i` 的分数设为负无穷，使 softmax 后权重为 0。
-
-如果 mask 错位，训练 loss 可能异常漂亮，因为模型偷看了未来；推理时没有未来 token，能力会崩溃。mask 是数据因果边界，不只是加速细节。
-
-## 7. MHA、MQA 与 GQA
-
-- MHA：每个 query 头都有独立 K、V 头，表达灵活但 KV Cache 大；
-- MQA：所有 query 头共享一组 K、V，缓存小但约束更强；
-- GQA：若干 query 头共享一组 K、V，在质量与缓存之间折中。
-
-MiniMind 当前实现使用多个 query 头和较少 KV 头，再通过 `repeat_kv` 对齐计算。理解这一点前，必须先掌握 `[B,H,T,D]` 的语义。
-
-## 8. 位置为什么必须进入模型
-
-纯 self-attention 对输入排列本身没有顺序偏好。位置编码为模型提供次序或相对距离信息：
-
-- 绝对位置向量直接加入 token 表示；
-- RoPE 旋转 Q、K，使点积携带相对位置信息；
-- ALiBi 用与距离相关的偏置影响分数；
-- 长上下文外推还要考虑训练长度、频率和注意力退化。
-
-RoPE 不改变 Q、K 的 shape，只改变同一维度中成对坐标的数值。
-
-## 9. 一个 Decoder Block
-
-现代 Decoder-only Transformer 通常包含：
+以常见的 pre-norm Decoder Block 为例；完整分步解释见[Decoder Block 课程](/ai/transformers/decoder-block)：
 
 ```text
 x
- ├─ Norm → Causal Self-Attention → 残差相加
- └─ Norm → FFN/SwiGLU             → 残差相加
+├─ residual ───────────────────────────────┐
+└─ norm → causal self-attention → dropout ─┴→ x₁
+   x₁
+   ├─ residual ────────────────────────────┐
+   └─ norm → FFN / MLP → dropout ─────────┴→ x₂
 ```
 
-注意力负责 token 之间通信，FFN 对每个 token 独立做非线性特征变换；残差保留原信息并提供短梯度路径；RMSNorm 控制特征尺度。堆叠多个 Block 后，经输出头映射到词表 logits。
+- causal self-attention 只允许读取当前位置及过去位置；
+- residual 保留原信息并提供短路径；
+- normalization 调整进入子层的特征尺度；
+- FFN 对每个 token 独立使用相同参数；
+- 多层 Block 重复“通信 + 逐位置变换”，逐步形成上下文化表示。
 
-## 10. 本章实践与过关标准
+Encoder、Decoder 和不同模型实现会调整 mask、norm 位置、激活函数、位置编码与 FFN 结构，但注意力的核心计算不变。
 
-1. 手写单头 attention，打印从 `[B,T,C]` 到 `[B,T,C]` 的每个 shape；
-2. 扩展为多头并验证拆头前后元素数不变；
-3. 构造极小序列，观察 mask 前后的注意力矩阵；
-4. 比较 MHA 与 GQA 的 KV 元素数；
-5. 实现一个 Decoder Block，并为 shape、mask、梯度写测试。
+## 本章不覆盖什么
 
-过关不是背出公式，而是能解释公式中的每一项为什么存在、每次变形服务于哪次计算，以及错误会怎样暴露。
+本章建立注意力的最小正确模型，不展开：
 
+- 大规模预训练目标、数据清洗和分布式训练；
+- FlashAttention 等具体 kernel 的实现细节；
+- RoPE、ALiBi 等位置编码的完整推导；
+- beam search、采样策略和服务调度；
+- 具体模型版本的全部工程差异。
+
+这些主题只有在 QKV、mask 和 shape 的基础不再混淆后才值得展开。
+
+## 过关标准
+
+不查资料应能完成：
+
+1. 把一个教学 token 对应到 `X` 的一行，并说明 Query、Key、Value 的职责；
+2. 手算两 token 的单头注意力，解释 scores 的行列、mask 时机和 Softmax 轴；
+3. 用断言验证未来权重为 0、合法权重行和为 1、输出保留 query 轴；
+4. 从 `[B,T,C]` 推导多头的投影、拆头、打分、汇总和合并 shape；
+5. 区分 Block 中的跨 token attention 与逐 token FFN；
+6. 区分数学闭环正确、实现通过固定样例和真实模型能力有效三件事。
+
+完成[复习与验收](/ai/transformers/review)后，再进入[基础模型与生成模型](/ai/foundation-models)。

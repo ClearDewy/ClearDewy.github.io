@@ -1,0 +1,47 @@
+[project]
+name = "cleardewy-practices"
+version = "0.1.0"
+description = "Reproducible code practices for Dewyx Docs"
+requires-python = ">=3.12,<3.13"
+dependencies = []
+
+[project.optional-dependencies]
+cpu = [
+    "torch==2.13.0; sys_platform == 'win32' or sys_platform == 'linux'",
+]
+mps = [
+    "torch==2.13.0; sys_platform == 'darwin' and platform_machine == 'arm64'",
+]
+cu130 = [
+    "torch==2.13.0; sys_platform == 'win32' or sys_platform == 'linux'",
+]
+
+[tool.uv]
+conflicts = [
+    [
+        { extra = "cpu" },
+        { extra = "mps" },
+        { extra = "cu130" },
+    ],
+]
+required-environments = [
+    "sys_platform == 'darwin' and platform_machine == 'arm64'",
+    "sys_platform == 'win32' and platform_machine == 'AMD64'",
+    "sys_platform == 'linux' and platform_machine == 'x86_64'",
+]
+
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-cpu", extra = "cpu" },
+    { index = "pytorch-cu130", extra = "cu130" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu130"
+url = "https://download.pytorch.org/whl/cu130"
+explicit = true

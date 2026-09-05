@@ -38,6 +38,9 @@ jobs:
       - name: Verify Python examples
         run: npm run check:python
 
+      - name: Verify content contracts
+        run: npm run check:content
+
       - name: Build site
         run: npm run docs:build
 

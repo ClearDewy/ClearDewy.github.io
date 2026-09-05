@@ -1,61 +1,72 @@
 ---
-title: 数据、训练与对齐
-date: 2026-09-04
-categories:
-  - 智能算法
-tags:
-  - Training
-  - Tokenization
-  - Alignment
-description: 连接数据生命周期、预训练、微调、偏好优化和训练系统。
+title: 5. 数据、训练与对齐
+date: 2026-09-05
+updated: 2026-09-05
+type: overview
+status: learnable
+track: ai
+categories: [智能算法]
+tags: [Data, Pretraining, SFT, Alignment]
+description: 从数据谱系和切分出发，完成预训练、监督微调、LoRA 与偏好优化的可审计训练闭环。
 ---
 
-# 数据、训练与对齐
+# 5. 数据、训练与对齐
 
-模型结构定义能表示什么，数据和训练目标决定实际学到什么。本章把训练看作一条可审计的数据—目标—优化—评测链。
+第 4 章说明了模型怎样学习 next-token。本章回答更现实的问题：**哪些 token 进入训练、哪些位置产生 loss、不同训练阶段到底在改变什么行为？**
 
-## 1. 数据生命周期
+```text
+原始来源 → 许可与数据谱系 → 清洗/去重/切分 → 样本与目标
+→ 预训练基线 → SFT → LoRA/全参适配 → 偏好优化
+→ 固定评测、回归检查与模型卡
+```
 
-数据要记录来源、许可、时间范围、语言/领域分布、清洗规则、去重策略、版本和已知偏差。质量不是单一分数：正确性、覆盖、难度、多样性、安全性和任务一致性可能互相冲突。
+## 固定案例
 
-训练/评测污染、近重复、模板泄漏和当前信息混入历史切片，会让指标失真。数据处理本身必须可复现，并保留丢弃原因与抽样审查。
+全章使用“整数加法助手”作为最小任务：
 
-## 2. Tokenizer 与样本构造
+```text
+用户：2 + 3 等于多少？
+助手：5
+```
 
-BPE、WordPiece 和 Unigram 用不同方式在词表大小、序列长度和未知片段间取舍；ByteLevel 提供更完整的字节覆盖。特殊 token 和 chat template 定义结构协议，不能只当普通字符串。
+它很小，但能暴露数据重复、模板错误、Prompt 是否计入 loss、偏好标签反转和训练/评测污染。真实对话能力远比这个任务复杂，本例只用于验证训练契约。
 
-训练样本还要决定：截断、padding、packing、attention mask、label shift 和 loss mask。任何一个边界错一位，都可能产生“loss 正常但目标错误”的静默故障。
+## 唯一学习顺序
 
-## 3. 预训练
+| 顺序 | 页面 | 完成证据 |
+| ---: | --- | --- |
+| 1 | [数据谱系、去重与切分](/ai/data-training-alignment/data-lineage-and-splits) | 能追踪一条样本来源并识别泄漏 |
+| 2 | [预训练运行怎样建立证据](/ai/data-training-alignment/pretraining-evidence) | 能从单批次过拟合推进到可恢复基线 |
+| 3 | [SFT 与 Chat Template 怎样定义监督目标](/ai/data-training-alignment/sft-and-chat-template) | 能逐 token 标出上下文和 loss 位置 |
+| 4 | [LoRA 怎样进行参数高效适配](/ai/data-training-alignment/lora-adaptation) | 能解释低秩增量、冻结参数和合并边界 |
+| 5 | [偏好数据与 DPO 怎样改变相对概率](/ai/data-training-alignment/preference-alignment) | 能构造 chosen/rejected 并识别标签风险 |
+| 6 | [训练目标与数据审计实验](/ai/data-training-alignment/training-evidence-lab) | 运行固定样本审计并通过断言 |
+| 7 | [训练与对齐速查](/ai/data-training-alignment/reference) | 查询阶段、记录字段和失败模式 |
+| 8 | [第 5 章复习与验收](/ai/data-training-alignment/review) | 完成数据、目标、训练和偏好诊断 |
 
-预训练最先验证一批数据能否被过拟合，再扩大到小语料和正式运行。核心记录包括：模型/数据版本、batch、序列长度、token 数、学习率、优化器、精度、设备、随机种子、吞吐、验证 loss 和 checkpoint。
+## 三个训练阶段不要混淆
 
-混合精度、梯度累积、裁剪和分布式训练用于资源与稳定性，不改变学习目标；必须分别验证数值和恢复行为。
+| 阶段 | 数据形式 | 主要目标 | 不能直接证明 |
+| --- | --- | --- | --- |
+| 预训练 | 大规模连续 token | 学习通用条件分布 | 会遵循用户意图 |
+| SFT | Prompt—理想回答 | 模仿示范行为 | 偏好在所有分布都成立 |
+| 偏好优化 | 同 Prompt 的相对选择 | 提高 chosen 相对概率 | 奖励代表真实价值 |
 
-## 4. 微调与参数高效适配
+训练阶段变化时，数据 schema、loss mask、基线模型和评测都必须同步记录。
 
-- continued pretraining：继续学习某领域的语言分布；
-- SFT：用输入—目标响应教模型形成任务行为；
-- LoRA/Adapter：冻结主体，用低秩或小模块学习增量；
-- 蒸馏：让学生学习教师的输出或分布。
+## 本章边界
 
-训练成本降低不意味着数据、评测和回归风险消失。领域表现改善可能伴随通用能力退化。
+本章不详细展开分布式并行内核、在线服务调度和高风险动作控制；它们分别属于工程实现、第 6 章和第 7 章。这里的“对齐”指可测量的训练目标与期望行为更一致，不宣称解决价值对齐的全部问题。
 
-## 5. 从偏好到对齐
+## 过关标准
 
-偏好数据通常包含同一上下文下的 chosen/rejected。DPO 直接调整两者的相对 log-prob，并用参考模型限制偏离。Reward model + PPO 等路线先学习奖励，再通过在线采样优化策略。
+不查资料能够：
 
-GRPO/CISPO 等方法改变优势估计或策略更新方式，但都依赖奖励是否代表真实目标。reward hacking、模式坍缩、长度偏好和通用能力下降必须通过独立评测发现。
+1. 为任意训练样本给出来源、许可、处理版本与切分归属；
+2. 区分精确重复、近重复和语义相关样本；
+3. 从 chat template 写出 token 与 loss mask；
+4. 解释预训练、SFT、LoRA 和 DPO 分别更新什么；
+5. 运行单批次过拟合、验证 loss 和 checkpoint 恢复检查；
+6. 用固定评测证明改善，并列出没有被证明的部分。
 
-## 6. 训练闭环
-
-<ClientOnly>
-  <MermaidDiagram
-    title="数据与训练的证据闭环"
-    :code="`flowchart LR\n      A[数据版本] --> B[样本与目标检查]\n      B --> C[单批次过拟合]\n      C --> D[小规模基线]\n      D --> E[扩大训练]\n      E --> F[固定评测与误差分类]\n      F --> G{质量与回归可接受?}\n      G -- 否 --> A\n      G -- 是 --> H[候选模型]`"
-  />
-</ClientOnly>
-
-## 7. 本章实践
-
-用同一 tiny 模型依次完成预训练、SFT 和 LoRA；每阶段固定一组提示词与自动指标，并检查训练目标实际覆盖的 token。DPO 和在线 RL 只有在 SFT 基线与奖励验证成立后才进入。
+完成[章节验收](/ai/data-training-alignment/review)后进入[推理、评测与安全](/ai/inference-evaluation-safety)。

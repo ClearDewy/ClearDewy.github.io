@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref, watch } from "vue";
+import { useData } from "vitepress";
 import { basicSetup, EditorView } from "codemirror";
-import { EditorState } from "@codemirror/state";
+import { Compartment, EditorState } from "@codemirror/state";
 import { python } from "@codemirror/lang-python";
 import { javascript } from "@codemirror/lang-javascript";
 import { oneDark } from "@codemirror/theme-one-dark";
@@ -23,7 +24,9 @@ const emit = defineEmits<{
   "update:modelValue": [value: string];
 }>();
 
+const { isDark } = useData();
 const host = ref<HTMLElement>();
+const theme = new Compartment();
 let view: EditorView | undefined;
 
 onMounted(() => {
@@ -33,7 +36,7 @@ onMounted(() => {
     extensions: [
       basicSetup,
       language,
-      oneDark,
+      theme.of(isDark.value ? oneDark : []),
       EditorView.lineWrapping,
       EditorView.updateListener.of((update) => {
         if (update.docChanged) emit("update:modelValue", update.state.doc.toString());
@@ -51,6 +54,10 @@ watch(
   },
 );
 
+watch(isDark, (value) => {
+  view?.dispatch({ effects: theme.reconfigure(value ? oneDark : []) });
+});
+
 onBeforeUnmount(() => view?.destroy());
 </script>
 
@@ -60,12 +67,10 @@ onBeforeUnmount(() => view?.destroy());
 
 <style scoped>
 .code-editor {
-  min-height: 210px;
-  background: #282c34;
+  background: var(--vp-c-bg);
 }
 
 .code-editor :deep(.cm-editor) {
-  min-height: 210px;
   font-size: 14px;
 }
 

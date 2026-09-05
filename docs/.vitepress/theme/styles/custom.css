@@ -290,6 +290,19 @@ html[theme-color="ep-primary"] {
   padding: 0 16px 14px;
 }
 
+.interactive-fallback {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  clip-path: inset(50%) !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
 .interactive-error {
   margin: 0;
   padding: 12px 16px;
@@ -310,42 +323,116 @@ html[theme-color="ep-primary"] {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 14px 16px;
+  gap: 12px;
+  min-height: 42px;
+  padding: 7px 10px 7px 14px;
   border-bottom: 1px solid var(--vp-c-divider);
 }
 
-.python-playground__header div {
-  display: grid;
-  gap: 2px;
+.python-playground__title {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 9px;
 }
 
-.python-playground__header span,
-.python-playground > p {
+.python-playground__title strong {
+  overflow: hidden;
+  color: var(--vp-c-text-1);
+  font-size: 14px;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.python-playground__language {
+  flex: 0 0 auto;
+  padding: 2px 5px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 5px;
   color: var(--vp-c-text-2);
-  font-size: 12px;
+  background: var(--vp-c-bg);
+  font-family: var(--vp-font-family-mono);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
 }
 
-.python-playground button {
-  min-width: 92px;
-  padding: 8px 14px;
+.python-playground__actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.python-playground__action {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  padding: 0;
   border: 0;
-  border-radius: 999px;
-  color: white;
-  background: var(--vp-c-brand-1);
+  border-radius: 7px;
   cursor: pointer;
-  font-weight: 650;
+  line-height: 1;
+  transition: color 0.2s, background-color 0.2s, opacity 0.2s;
 }
 
-.python-playground button:disabled {
+.python-playground__action svg {
+  width: 17px;
+  height: 17px;
+}
+
+.python-playground__run {
+  color: var(--vp-c-text-2);
+  background: transparent;
+}
+
+.python-playground__run svg {
+  margin-left: 1px;
+  fill: currentColor;
+}
+
+.python-playground__run:hover:not(:disabled) {
+  color: var(--vp-c-text-1);
+  background: var(--vp-c-default-soft);
+}
+
+.python-playground__run:disabled {
   cursor: wait;
   opacity: 0.65;
+}
+
+.python-playground__toggle {
+  color: var(--vp-c-text-2);
+  background: transparent;
+}
+
+.python-playground__toggle:hover {
+  color: var(--vp-c-text-1);
+  background: var(--vp-c-default-soft);
+}
+
+.python-playground__toggle svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+  transition: transform 0.2s ease;
+}
+
+.python-playground__toggle svg.is-collapsed {
+  transform: rotate(-90deg);
 }
 
 .python-playground pre {
   min-height: 58px;
   margin: 0;
   padding: 14px 16px;
+  border-top: 1px solid var(--vp-c-divider);
   white-space: pre-wrap;
   color: var(--vp-c-text-1);
   background: var(--vp-c-bg);
@@ -354,9 +441,4 @@ html[theme-color="ep-primary"] {
 
 .python-playground pre.is-error {
   color: var(--vp-c-danger-1);
-}
-
-.python-playground > p {
-  margin: 0;
-  padding: 10px 16px 12px;
 }

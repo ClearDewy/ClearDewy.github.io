@@ -10,7 +10,8 @@
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
-    "check:python": "python3 examples/python/quickstart.py"
+    "check:python": "python3 examples/python/quickstart.py && python3 examples/python/ai_core_examples.py",
+    "check:content": "node scripts/check-content.mjs"
   },
   "dependencies": {
     "@codemirror/lang-javascript": "^6.2.5",

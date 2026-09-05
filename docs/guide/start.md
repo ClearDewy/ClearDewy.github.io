@@ -24,7 +24,7 @@ description: 知识库的四个专栏、内容边界与维护方式。
 
 Python、C++、Linux 等属于横跨专栏的工具或技术标签，不单独成为一级专栏。新增文章应先在对应专栏的知识地图中找到位置，再进入文章流。
 
-需要解释算法过程、系统状态或硬件时序时，可以使用站点内置的[交互式知识组件](/guide/interactive-components)。
+新增或重构内容应先遵循[知识文档体系规范](/guide/knowledge-documentation-standard)，再根据需要使用站点内置的[交互式知识组件](/guide/interactive-components)。
 
 ## 一篇笔记应当包含什么
 
@@ -38,3 +38,5 @@ Python、C++、Linux 等属于横跨专栏的工具或技术标签，不单独�
 ::: tip 写作原则
 能够运行的示例交给自动化验证；不能自动验证的观察，明确写出环境和日期。
 :::
+
+这里的四个问题用于快速自查。不同类型页面的完整模板、成熟度和完成标准见[知识文档体系规范](/guide/knowledge-documentation-standard)。
